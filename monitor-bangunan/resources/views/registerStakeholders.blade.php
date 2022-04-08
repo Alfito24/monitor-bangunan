@@ -59,7 +59,7 @@
         </div>
         <div class="mb-3 form-group">
             <label for="usia" class="form-label">Usia</label>
-            <input type="number" class="form-control" id="usia">
+            <input type="number" class="form-control" id="usia" name="usia">
         </div>
         <div class="mb-3 form-group" hidden>
             <label for="simbol" class="form-label">Simbol</label>
