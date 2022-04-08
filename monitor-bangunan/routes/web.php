@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\StakeholdersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,3 +20,5 @@ Route::get('/', function () {
 Route::get('/regisstakeholders', function () {
     return view('registerStakeholders');
 });
+Route::get('/register', [StakeholdersController::class, 'show']);
+Route::post('/register', [StakeholdersController::class, 'store']);
