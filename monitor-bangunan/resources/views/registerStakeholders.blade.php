@@ -23,6 +23,10 @@
     <form method="POST" action="/register">
         @csrf
         <div class="mb-3 form-group">
+          <label for="exampleInputEmail1" class="form-label">Email</label>
+          <input type="text" name="email" class="form-control" id="exampleInputEmail1" >
+        </div>
+        <div class="mb-3 form-group">
           <label for="exampleInputEmail1" class="form-label">Nama</label>
           <input type="text" name="name" class="form-control" id="exampleInputEmail1" >
         </div>
@@ -80,6 +84,7 @@
             <button type="submit" class="btn btn-primary text-center">Submit</button>
         </div>
       </form>
+      <small class="d-block text-center mt-2">Sudah memiliki akun? <a href="/login">Login</a></small>
    </div>
    </div>
     </div>

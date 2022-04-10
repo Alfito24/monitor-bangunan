@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\StakeholdersController;
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,5 +21,7 @@ Route::get('/', function () {
 Route::get('/regisstakeholders', function () {
     return view('registerStakeholders');
 });
+Route::get('/login', [LoginController::class, 'index']);
+Route::post('/login', [LoginController::class, 'authenticate']);
 Route::get('/register', [StakeholdersController::class, 'show']);
 Route::post('/register', [StakeholdersController::class, 'store']);
