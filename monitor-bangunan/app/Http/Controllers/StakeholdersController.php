@@ -18,7 +18,7 @@ class StakeholdersController extends Controller
             'pengetahuan'=>$request->pengetahuan,
             'usia'=>$request->usia,
             'pendidikan'=>$request->pendidikan,
-            'kategori' => 'D'
+            'kategori' => $request->kategori
         ]);
         // Stakeholders::create($validatedData);
         return redirect('/');
