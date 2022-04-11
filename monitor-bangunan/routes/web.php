@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\StakeholdersController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
@@ -18,6 +19,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/survey', function () {
+    return view('survey');
+});
+Route::get('/dashboard', [DashboardController::class, 'index']);
 Route::get('/regisstakeholders', function () {
     return view('registerStakeholders');
 });
@@ -25,3 +30,5 @@ Route::get('/login', [LoginController::class, 'index']);
 Route::post('/login', [LoginController::class, 'authenticate']);
 Route::get('/register', [StakeholdersController::class, 'show']);
 Route::post('/register', [StakeholdersController::class, 'store']);
+
+

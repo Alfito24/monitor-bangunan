@@ -15,7 +15,7 @@ class StakeholdersController extends Controller
     public function store(Request $request){
         User::create([
             'email'=>$request->email,
-            'name'=>$request->name,
+            'nama'=>$request->name,
             'peran'=>$request->peran,
             'kategori'=>$request->kategori,
             'pengetahuan'=>$request->pengetahuan,
@@ -25,6 +25,6 @@ class StakeholdersController extends Controller
             'password'=>Hash::make($request->password)
         ]);
         // Stakeholders::create($validatedData);
-        return redirect('/');
+        return redirect('/login');
     }
 }

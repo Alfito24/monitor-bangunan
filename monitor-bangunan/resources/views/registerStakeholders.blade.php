@@ -31,6 +31,10 @@
           <input type="text" name="name" class="form-control" id="exampleInputEmail1" >
         </div>
         <div class="mb-3 form-group">
+          <label for="exampleInputEmail1" class="form-label">Password</label>
+          <input type="password" name="password" class="form-control" id="exampleInputEmail1" >
+        </div>
+        <div class="mb-3 form-group">
             <label for="sel1" class="form-label">Kategori</label>
             <select class="form-select" id="sel1" name="kategori">
             <option value="0">Pilih kategori</option>
