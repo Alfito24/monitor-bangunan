@@ -7,20 +7,22 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    public function index(){
-        return view('login', [
+    public function index()
+    {
+        return view('main.login', [
             'title' => 'Login',
             'active' => 'login'
         ]);
     }
-    public function authenticate(Request $request){
-        $credentials =  $request -> validate([
+    public function authenticate(Request $request)
+    {
+        $credentials =  $request->validate([
             'email' => 'required|email:dns',
             'password' => 'required'
         ]);
-        if(Auth::attempt($credentials)){
+        if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            if(Auth::user()->kategori=='pemilik'){
+            if (Auth::user()->kategori == 'pemilik') {
                 return redirect('/dashboard');
             }
             return redirect('/survey');

@@ -1,0 +1,13 @@
+.container{
+    display: flex;
+}
+.container2{
+    align-items: center;
+    justify-content: center;
+    width: 500px;
+    background: rgb(180, 170, 170);
+    padding: 20px;
+    border-radius: 10px;
+    margin: 50px auto;
+    min-height: 50vh;
+}
