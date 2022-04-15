@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProyekController;
+use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\StakeholdersController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PageController;
@@ -31,5 +33,11 @@ Route::get('/regisstakeholders', function () {
 });
 Route::get('/login', [LoginController::class, 'index']);
 Route::post('/login', [LoginController::class, 'authenticate']);
+Route::post('/logout', [LoginController::class, 'logout']);
 Route::get('/register', [StakeholdersController::class, 'show']);
 Route::post('/register', [StakeholdersController::class, 'store']);
+
+Route::get('/survey', [SurveyController::class, 'show']);
+
+Route::get('/proyekform', [ProyekController::class, 'show']);
+Route::post('/proyekform', [ProyekController::class, 'store']);
