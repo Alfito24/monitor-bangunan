@@ -27,7 +27,9 @@ Route::get('/', [PageController::class, 'landing']);
 Route::get('/survey', function () {
     return view('survey');
 });
-Route::get('/dashboard', [DashboardController::class, 'index']);
+Route::get('/dashboard/{id}', [DashboardController::class, 'index']);
+Route::get('/dashboard/profil/{id}', [DashboardController::class, 'profil']);
+Route::get('/dashboard/tambahproyek/{id}', [DashboardController::class, 'viewproyek']);
 Route::get('/regisstakeholders', function () {
     return view('registerStakeholders');
 });
