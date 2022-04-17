@@ -28,6 +28,7 @@
     <link href="landing/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
     <link href="landing/assets/css/style.css" rel="stylesheet">
+
     @yield('css')
 </head>
 

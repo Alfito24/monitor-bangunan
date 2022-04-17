@@ -11,7 +11,7 @@ class StakeholdersController extends Controller
 {
     public function show()
     {
-        return view('main.registerStakeholders');
+        return view('main.register2');
     }
     public function store(Request $request)
     {

@@ -9,40 +9,40 @@ use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
-    public function index($id){
+    public function index($id)
+    {
         $proyeks = DB::table('proyeks')->where('user_id', $id)->get();
         $users = DB::table('users')->where('id', $id)->first();
-        if(Auth::user()->kategori=='pemilik')
-        {
+        if (Auth::user()->kategori == 'pemilik') {
             return view('dashboard.main', compact('users', 'proyeks'));
-        } else{
+        } else {
             abort(403);
         }
     }
-    public function profil($id){
+    public function profil($id)
+    {
         $users = DB::table('users')->where('id', $id)->first();
-        if(Auth::user()->kategori=='pemilik')
-        {
+        if (Auth::user()->kategori == 'pemilik') {
             return view('dashboard.profil', compact('users'));
-        } else{
+        } else {
             abort(403);
         }
     }
-    public function viewproyek($id){
+    public function viewproyek($id)
+    {
         $users = DB::table('users')->where('id', $id)->first();
-        if(Auth::user()->kategori=='pemilik')
-        {
+        if (Auth::user()->kategori == 'pemilik') {
             return view('dashboard.tambahproyek', compact('users'));
-        } else{
+        } else {
             abort(403);
         }
     }
-    public function main($id){
+    public function main($id)
+    {
         $proyeks = DB::table('proyeks')->where('user_id', $id)->get();
-        if(Auth::user()->kategori=='pemilik')
-        {
+        if (Auth::user()->kategori == 'pemilik') {
             return view('dashboard.main', compact('proyeks'));
-        } else{
+        } else {
             abort(403);
         }
     }

@@ -8,28 +8,38 @@
 
         <nav id="navbar" class="navbar">
             <ul>
-               @if (Auth::check())
-               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    {{ Auth::user()->nama }}
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="/dashboard/{{ auth()->user()->id }}">Dashboard</a></li>
-                  <li><a class="dropdown-item" href="#"><form action="/logout" method="POST">
-                    @csrf
-                    <button class="dropdown-item">Logout</button>
-                </form></a></li>
-                </ul>
-              </li>
-               {{-- <li><a class="nav-link scrollto" href="/login">{{ Auth::user()->nama }}</a></li>
+                @if (Auth::check())
+                    <li class="dropdown"><a href="#"><span>{{ Auth::user()->nama }}</span> <i
+                                class="bi bi-chevron-down"></i></a>
+                        <ul>
+                            <li><a href="/dashboard/{{ auth()->user()->id }}">Dashboard</a></li>
+                            <li><a href="#">
+                                    <form action="/logout" method="POST">
+                                        @csrf
+                                        <button class="btn btn-default">Logout</button>
+                                    </form>
+                                </a></li>
+                        </ul>
+                    </li>
+                    {{-- <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="/dashboard/{{ auth()->user()->id }}">Dashboard</a></li>
+                        <li><a class="dropdown-item" href="#">
+                                <form action="/logout" method="POST">
+                                    @csrf
+                                    <button class="dropdown-item">Logout</button>
+                                </form>
+                            </a></li>
+                    </ul> --}}
+                    </li>
+                    {{-- <li><a class="nav-link scrollto" href="/login">{{ Auth::user()->nama }}</a></li>
                <li><form action="/logout" method="POST">
                 @csrf
                 <button class="nav-link scrollto">Logout</button>
             </form></li> --}}
                 @else
-                <li><a class="nav-link scrollto" href="/login">Login</a></li>
-                <li><a class="getstarted scrollto" href="/register">Register</a></li>
-               @endif
+                    <li><a class="nav-link scrollto" href="/login">Login</a></li>
+                    <li><a class="getstarted scrollto" href="/register">Register</a></li>
+                @endif
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav><!-- .navbar -->

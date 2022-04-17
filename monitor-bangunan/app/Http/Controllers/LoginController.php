@@ -9,7 +9,7 @@ class LoginController extends Controller
 {
     public function index()
     {
-        return view('main.login', [
+        return view('main.login2', [
             'title' => 'Login',
             'active' => 'login'
         ]);
