@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Proyek;
 use Illuminate\Http\Request;
+use App\Http\Controllers\DashboardController;
 
 class ProyekController extends Controller
 {
@@ -17,6 +18,6 @@ class ProyekController extends Controller
             'keteranganProyek'=>$request->keterangan,
             'user_id'=>auth() -> user() -> id
         ]);
-        return redirect('/');
+        return redirect()->action([DashboardController::class, 'index'], ['id'=>auth()->user()->id]);
     }
 }

@@ -21,7 +21,7 @@
                         </div>
                         <div class="mb-3 form-group">
                             <label for="exampleInputEmail1" class="form-label">Tanggal Proyek</label>
-                            <input type="date" name="tanggal" class="form-control" id="exampleInputEmail1">
+                            <input type="date" name="tanggal" class="form-control" id="exampleInputEmail1" required>
                         </div>
                         <div class="mb-3 form-group">
                             <label for="exampleInputEmail1" class="form-label">Keterangan</label>

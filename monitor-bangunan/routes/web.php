@@ -41,5 +41,6 @@ Route::post('/register', [StakeholdersController::class, 'store']);
 
 Route::get('/survey', [SurveyController::class, 'show']);
 
-Route::get('/proyekform', [ProyekController::class, 'show']);
+
+Route::get('/project', [ProyekController::class, 'show']);
 Route::post('/proyekform', [ProyekController::class, 'store']);
