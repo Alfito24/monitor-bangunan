@@ -61,16 +61,8 @@
                                 <div class="field padding-bottom--24">
                                     <div class="grid--50-50">
                                         <label for="password">Password</label>
-                                        <div class="reset-pass">
-                                            <a href="#">Forgot your password?</a>
-                                        </div>
                                     </div>
                                     <input type="password" name="password">
-                                </div>
-                                <div class="field field-checkbox padding-bottom--24 flex-flex align-center">
-                                    <label for="checkbox">
-                                        <input type="checkbox" name="checkbox"> Stay signed in for a week
-                                    </label>
                                 </div>
                                 <div class="field padding-bottom--24">
                                     <input type="submit" name="submit" value="Continue">
@@ -79,7 +71,7 @@
                                     <a class="ssolink" href="#">Use single sign-on (Google) instead</a>
                                 </div> --}}
                             </form>
-                            <span class="span-register">Don't have an account? <a href="">Sign up</a></span>
+                            <span class="span-register">Don't have an account? <a href="/register">Sign up</a></span>
                         </div>
 
                     </div>

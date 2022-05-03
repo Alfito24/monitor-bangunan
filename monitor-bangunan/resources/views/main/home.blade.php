@@ -15,7 +15,7 @@
                     <h2 data-aos="fade-up" data-aos-delay="400">Please add your project and take a survey</h2>
                     <div data-aos="fade-up" data-aos-delay="600">
                         <div class="text-center text-lg-start">
-                            <a href="/project"
+                            <a href="/project/add"
                                 class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
                                 <span>Add Project</span>
                                 <i class="bi bi-arrow-right"></i>

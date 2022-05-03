@@ -78,7 +78,7 @@
       <a href="/" class="brand-link">
         <img src="{{ asset('admintemplate/') }}/dist/img/Trinity.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
           style="opacity: .8">
-        <span class="brand-text font-weight-light">Oasis</span>
+        <span class="brand-text font-weight-light">Monitor Bangunan</span>
       </a>
 
       <!-- Sidebar -->
@@ -100,7 +100,7 @@
             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
             <li class="nav-item">
-              <a href="/mitras" class="nav-link">
+              <a href="/dashboard/{{ auth()->user()->id }}" class="nav-link">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
                   Dashboard
@@ -181,7 +181,7 @@
   </div>
   <!-- /.content-wrapper -->
   <footer class="main-footer">
-    <strong>Copyright &copy; 2022 <a href="http://adminlte.io">Oasis</a>.</strong>
+    <strong>Copyright &copy; 2022 <a href="http://adminlte.io">Monitor Bangunan</a>.</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
 

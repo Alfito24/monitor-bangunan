@@ -5,10 +5,10 @@
 @endsection
 
 @section('css')
-    <link href="css/register.css" rel="stylesheet">
+    <link href="{{ asset('css/register.css') }}" rel="stylesheet">
 @endsection
 @section('content')
-    <div class="container">
+    <div class="container bg-white">
         <div class="container2">
             <h1 class="text-center">Registrasi Proyek</h1>
             <div class="row">
