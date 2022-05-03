@@ -20,14 +20,14 @@
         rel="stylesheet">
 
     <!-- Vendor CSS Files -->
-    <link href="landing/assets/vendor/aos/aos.css" rel="stylesheet">
-    <link href="landing/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="landing/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="landing/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-    <link href="landing/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-    <link href="landing/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="{{ asset('landing/assets/vendor/aos/aos.css') }}" rel="stylesheet">
+    <link href="{{ asset('landing/assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('landing/assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+    <link href="{{ asset('landing/assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('landing/assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
+    <link href="{{ asset('landing/assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
 
-    <link href="landing/assets/css/style.css" rel="stylesheet">
+    <link href="{{ asset('landing/assets/css/style.css') }}" rel="stylesheet">
 
     @yield('css')
 </head>
@@ -40,14 +40,14 @@
     @yield('js')
 
     @yield('footer')
-    <script src="landing/assets/vendor/purecounter/purecounter.js"></script>
-    <script src="landing/assets/vendor/aos/aos.js"></script>
-    <script src="landing/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="landing/assets/vendor/glightbox/js/glightbox.min.js"></script>
-    <script src="landing/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-    <script src="landing/assets/vendor/swiper/swiper-bundle.min.js"></script>
-    <script src="landing/assets/vendor/php-email-form/validate.js"></script>
+    <script src="{{ asset('landing/assets/vendor/purecounter/purecounter.js') }}"></script>
+    <script src="{{ asset('landing/assets/vendor/aos/aos.js') }}"></script>
+    <script src="{{ asset('landing/assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('landing/assets/vendor/glightbox/js/glightbox.min.js') }}"></script>
+    <script src="{{ asset('landing/assets/vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
+    <script src="{{ asset('landing/assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
+    <script src="{{ asset('landing/assets/vendor/php-email-form/validate.js') }}"></script>
 
     <!-- Template Main JS File -->
-    <script src="landing/assets/js/main.js"></script>
+    <script src="{{ asset('landing/assets/js/main.js') }}"></script>
 </body>
