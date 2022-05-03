@@ -8,7 +8,7 @@
 
         <nav id="navbar" class="navbar">
             <ul>
-                @if (Auth::check())
+                @if (Auth::check() && Auth::user()->kategori=="pemilik")
                     <li class="dropdown"><a href="#"><span>{{ Auth::user()->nama }}</span> <i
                                 class="bi bi-chevron-down"></i></a>
                         <ul>
@@ -36,6 +36,18 @@
                 @csrf
                 <button class="nav-link scrollto">Logout</button>
             </form></li> --}}
+                @elseif (Auth::check())
+                <li class="dropdown"><a href="#"><span>{{ Auth::user()->nama }}</span> <i
+                    class="bi bi-chevron-down"></i></a>
+                <ul>
+                    <li><a href="#">
+                        <form action="/logout" method="POST">
+                            @csrf
+                            <button class="btn btn-default">Logout</button>
+                        </form>
+                    </a></li>
+                </ul>
+                 </li>
                 @else
                     <li><a class="nav-link scrollto" href="/login">Login</a></li>
                     <li><a class="getstarted scrollto" href="/register">Register</a></li>

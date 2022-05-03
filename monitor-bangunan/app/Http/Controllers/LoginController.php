@@ -25,7 +25,7 @@ class LoginController extends Controller
             if (Auth::user()->kategori == 'pemilik') {
                 return redirect('/');
             }
-            return redirect('/survey');
+            return redirect('/pilihproyek');
         }
         return back()->with('loginError', 'Login Failed');
     }
@@ -37,6 +37,6 @@ class LoginController extends Controller
 
         $request->session()->regenerateToken();
 
-        return back();
+        return redirect('/');
     }
 }

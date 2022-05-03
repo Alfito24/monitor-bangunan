@@ -14,12 +14,13 @@
         <div class="col-4 justify-content-center">
             <div class="owl-carousel owl-theme">
                 <div class="item mb-4">
-                    <a href="proyek/{{ $p->id }}">
+                    <a href="survey/proyek/{{ $p->id }}">
                     <div class="card border-0 shadow">
                         <img src="https://source.unsplash.com/400x300?building" alt="" class="card-img-top">
                         <div class="card-body">
-                            <div class="card-title text-center">
+                            <div class="card-title text-center" style="color: black">
                                 <h4>{{ $p->namaProyek }}</h4>
+                                <h6><i class="fas fa-calendar-alt"></i> {{ $p->tanggalProyek }}</h6>
                             </div>
                         </div>
                     </div>
