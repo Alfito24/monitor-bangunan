@@ -12,14 +12,22 @@
             <div class="row">
                 <div class="col-lg-6 d-flex flex-column justify-content-center">
                     <h1 data-aos="fade-up">Welcome to Social Benefit in Residential Building Survey</h1>
-                    <h2 data-aos="fade-up" data-aos-delay="400">Please add your project and take a survey</h2>
+                    <h2 data-aos="fade-up" data-aos-delay="400">Please add your project or take a survey</h2>
                     <div data-aos="fade-up" data-aos-delay="600">
                         <div class="text-center text-lg-start">
+                            @if (Auth::check() && Auth::user()->kategori=='pemilik')
                             <a href="/project/add"
-                                class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
+                            class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
                                 <span>Add Project</span>
+                            <i class="bi bi-arrow-right"></i>
+                            </a>
+                            @elseif(Auth::check())
+                            <a href="/pilihproyek"
+                                class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
+                                <span>Take a Survey</span>
                                 <i class="bi bi-arrow-right"></i>
                             </a>
+                            @endif
                         </div>
                     </div>
                 </div>
