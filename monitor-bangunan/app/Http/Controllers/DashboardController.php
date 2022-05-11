@@ -28,6 +28,17 @@ class DashboardController extends Controller
             abort(403);
         }
     }
+
+    public function menuUtama($id)
+    {
+        $users = DB::table('users')->where('id', $id)->first();
+        if (Auth::user()->kategori == 'pemilik') {
+            return view('dashboard.menu-utama', compact('users'));
+        } else {
+            abort(403);
+        }
+    }
+
     public function viewproyek($id)
     {
         $users = DB::table('users')->where('id', $id)->first();
