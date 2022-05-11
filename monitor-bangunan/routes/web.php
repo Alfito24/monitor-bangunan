@@ -27,21 +27,23 @@ Route::get('/', [PageController::class, 'landing']);
 Route::get('/survey', function () {
     return view('survey');
 });
-Route::get('/dashboard/{id}', [DashboardController::class, 'index']);
-Route::get('/dashboard/profil/{id}', [DashboardController::class, 'profil']);
-Route::get('/dashboard/menu_utama/{id}', [DashboardController::class, 'menuUtama']);
+
 Route::get('/dashboard/tambahproyek/{id}', [DashboardController::class, 'viewproyek']);
 Route::get('/regisstakeholders', function () {
-    return view('registerStakeholders');
-});
-Route::get('/login', [LoginController::class, 'index']);
+Route::group(['middleware' => ['pemilik']], function () {
+    Route::get('/dashboard/tambahproyek/{id}', [DashboardController::class, 'viewproyek']);
+    Route::get('/project/add', [ProyekController::class, 'show']);
+  });
+
+Route::get('/login', [LoginController::class, 'index'])->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout']);
 Route::get('/register', [StakeholdersController::class, 'show']);
 Route::post('/register', [StakeholdersController::class, 'store']);
 
 Route::get('/survey', [SurveyController::class, 'show']);
-
-
-Route::get('/project', [ProyekController::class, 'show']);
 Route::post('/proyekform', [ProyekController::class, 'store']);
+
+Route::get('/pilihproyek', [ProyekController::class, 'index']);
+Route::get('/survey/proyek/{$id}', [SurveyController::class, 'index']);
+
