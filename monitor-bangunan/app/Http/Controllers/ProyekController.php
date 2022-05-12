@@ -24,10 +24,10 @@ class ProyekController extends Controller
         $proyek->keteranganProyek = $request->keterangan;
         $proyek->save();
         $proyek->stakeholder()->attach(auth()->user()->id);
-        return redirect()->action([DashboardController::class, 'index'], ['id'=>auth()->user()->id]);
+        return redirect('dashboard/menu_utama', ['proyekId'=>$proyek->id]);
     }
-    public function index(){
-        $proyeks = DB::table('proyeks')->get();
+    public function index($userId){
+        $proyeks = DB::table('proyeks')->join('proyek_user', 'proyek_user.proyek_id', '=', 'proyeks.id')->get();
         return view('pilihproyek', compact('proyeks'));
     }
 }

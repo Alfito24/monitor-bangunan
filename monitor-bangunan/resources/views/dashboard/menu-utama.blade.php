@@ -71,6 +71,7 @@
                                                         </tr>
                                                     </tbody>
                                                 </table>
+                                                <a href="/regisstakeholders">Klik disini untuk tambah Stakeholder</a>
                                             </div>
                                             <!-- /.card-body -->
                                         </div>
@@ -117,6 +118,7 @@
                                                         </tr>
                                                     </tbody>
                                                 </table>
+                                                <a href="/regisstakeholders">Klik disini untuk tambah Stakeholder</a>
                                             </div>
                                             <!-- /.card-body -->
                                         </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Proyek;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,9 +13,9 @@ class DashboardController extends Controller
 {
     public function index($id)
     {
-        $user = User::where('id', $id)->first();
+        $users = User::where('id', $id)->first();
         if (Auth::user()->kategori == 'pemilik') {
-            return view('dashboard.main', compact('user'));
+            return view('dashboard.main', compact('users'));
         } else {
             abort(403);
         }
@@ -29,11 +30,12 @@ class DashboardController extends Controller
         }
     }
 
-    public function menuUtama($id)
+    public function menuUtama($proyekId)
     {
-        $users = DB::table('users')->where('id', $id)->first();
+        $users = User::where('id', auth()->user()->id)->first();
+        $proyek = Proyek::where('id', $proyekId)->first();
         if (Auth::user()->kategori == 'pemilik') {
-            return view('dashboard.menu-utama', compact('users'));
+            return view('dashboard.menu-utama', compact('users','proyek'));
         } else {
             abort(403);
         }

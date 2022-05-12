@@ -1,7 +1,7 @@
 <header id="header" class="header fixed-top">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
-        <a href="index.html" class="logo d-flex align-items-center">
+        <a href="/pilihproyek/{{auth()->user()->id}}" class="logo d-flex align-items-center">
             <img src="landing/assets/img/logo.png" alt="">
             <span>Monitor</span>
         </a>
@@ -12,7 +12,7 @@
                     <li class="dropdown"><a href="#"><span>{{ Auth::user()->nama }}</span> <i
                                 class="bi bi-chevron-down"></i></a>
                         <ul>
-                            <li><a href="/dashboard/{{ auth()->user()->id }}">Dashboard</a></li>
+                            <li><a href="/pilihproyek/{{ auth()->user()->id }}">Dashboard</a></li>
                             <li><a href="#">
                                     <form action="/logout" method="POST">
                                         @csrf
