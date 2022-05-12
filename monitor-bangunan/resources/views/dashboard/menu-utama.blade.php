@@ -118,7 +118,7 @@
                                                         </tr>
                                                     </tbody>
                                                 </table>
-                                                <a href="/regisstakeholders">Klik disini untuk tambah Stakeholder</a>
+                                                <a href="/">Klik disini untuk tambah Variabel</a>
                                             </div>
                                             <!-- /.card-body -->
                                         </div>
