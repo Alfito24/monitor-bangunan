@@ -47,4 +47,3 @@ Route::get('/pilihproyek', [ProyekController::class, 'index']);
 Route::get('/survey/proyek/{$id}', [SurveyController::class, 'index']);
 
 Route::get('/project', [ProyekController::class, 'show']);
-Route::post('/proyekform', [ProyekController::class, 'store']);

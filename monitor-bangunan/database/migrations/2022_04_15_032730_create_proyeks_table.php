@@ -18,7 +18,6 @@ class CreateProyeksTable extends Migration
             $table->string('namaProyek');
             $table->date('tanggalProyek');
             $table->string('keteranganProyek')->nullable();
-            $table->foreignId('user_id');
             $table->timestamps();
         });
     }

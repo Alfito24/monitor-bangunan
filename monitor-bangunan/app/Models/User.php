@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Proyek;
+use App\Models\Variabel;
 
 class User extends Authenticatable
 {
@@ -38,7 +40,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    public function proyeks(){
-        return $this->hasMany(Proyek::class);
+    public function proyek(){
+        return $this->belongsToMany(Proyek::class);
+    }
+    public function variabel(){
+        return $this->belongsToMany(Variabel::class);
     }
 }

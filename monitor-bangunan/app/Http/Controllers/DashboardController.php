@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -11,10 +12,9 @@ class DashboardController extends Controller
 {
     public function index($id)
     {
-        $proyeks = DB::table('proyeks')->where('user_id', $id)->get();
-        $users = DB::table('users')->where('id', $id)->first();
+        $user = User::where('id', $id)->first();
         if (Auth::user()->kategori == 'pemilik') {
-            return view('dashboard.main', compact('users', 'proyeks'));
+            return view('dashboard.main', compact('user'));
         } else {
             abort(403);
         }

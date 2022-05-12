@@ -62,10 +62,11 @@
                                                             <td>John Doe</td>
                                                             <td>11-7-2014</td>
                                                             <td>
-                                                                <button type="button" class="btn btn-success btn-sm">Add
-                                                                </button> | <button type="button"
-                                                                    class="btn btn-primary btn-sm">Detail</button>
-
+                                                                <button type="button" class="btn btn-success btn-sm">Edit</button>
+                                                                 |
+                                                                <button type="button" class="btn btn-info btn-sm">Detail</button>
+                                                                 |
+                                                                 <button type="button" class="btn btn-danger btn-sm">Delete</button>
                                                             </td>
                                                         </tr>
                                                     </tbody>

@@ -14,7 +14,7 @@
         <div class="col-4 justify-content-center">
             <div class="owl-carousel owl-theme">
                 <div class="item mb-4">
-                    <a href="survey/proyek/{{ $p->id }}">
+                    <a href="dashboard/menu_utama/{{ $p->id }}">
                     <div class="card border-0 shadow">
                         <img src="https://source.unsplash.com/400x300?building" alt="" class="card-img-top">
                         <div class="card-body">

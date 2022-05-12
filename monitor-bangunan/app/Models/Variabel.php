@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Variabel extends Model
 {
     use HasFactory;
+    public function stakeholder(){
+        return $this->belongsToMany(User::class);
+    }
+    public function proyek(){
+        return $this->belongsToMany(Proyek::class);
+    }
 }

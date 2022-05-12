@@ -18,12 +18,12 @@ class ProyekController extends Controller
         }
     }
     public function store(Request $request){
-        Proyek::create([
-            'namaProyek'=>$request->nama,
-            'tanggalProyek'=>$request->tanggal,
-            'keteranganProyek'=>$request->keterangan,
-            'user_id'=>auth() -> user() -> id
-        ]);
+        $proyek = new Proyek();
+        $proyek->namaProyek = $request->nama;
+        $proyek->tanggalProyek = $request->tanggal;
+        $proyek->keteranganProyek = $request->keterangan;
+        $proyek->save();
+        $proyek->stakeholder()->attach(auth()->user()->id);
         return redirect()->action([DashboardController::class, 'index'], ['id'=>auth()->user()->id]);
     }
     public function index(){
