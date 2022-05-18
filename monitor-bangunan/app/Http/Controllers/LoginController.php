@@ -22,6 +22,7 @@ class LoginController extends Controller
         ]);
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
+            $id = auth()->user()->id;
             if (Auth::user()->kategori == 'pemilik') {
                 return redirect('/pilihproyek');
             }

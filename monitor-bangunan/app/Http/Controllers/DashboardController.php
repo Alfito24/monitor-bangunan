@@ -15,7 +15,7 @@ class DashboardController extends Controller
     {
         $users = User::where('id', $id)->first();
         if (Auth::user()->kategori == 'pemilik') {
-            return view('dashboard.main', compact('users'));
+            return view('dashboard.main', ['users'=>$users]);
         } else {
             abort(403);
         }
