@@ -73,7 +73,27 @@
                                                     </tbody>
                                                     @endforeach
                                                 </table>
-                                                <a href="/regisstakeholders">Klik disini untuk tambah Stakeholder</a>
+                                                <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#demo">Klik di sini untuk menambah stakeholder</button>
+                                                    <div id="demo" class="collapse container">
+                                                       <form action="" method="POST">
+                                                           <div class="row">
+                                                               <div class="col-4">
+                                                                <div class="mb-3 mt-3">
+                                                                    <label for="exampleInputEmail1" class="form-label">Email Stakeholder</label>
+                                                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
+                                                                  </div>
+                                                               </div>
+                                                           </div>
+                                        
+                                                          <div class="mb-3" hidden>
+                                                            <label for="exampleInputPassword1" class="form-label">id</label>
+                                                            <input type="number" class="form-control" id="exampleInputPassword1" name="id">
+                                                          </div>
+                                                          <button type="submit" class="btn btn-primary">Tambah</button>
+                                                       </form>
+                                                    </div>
+                                            </div>
+
                                             </div>
                                             <!-- /.card-body -->
                                         </div>
@@ -191,4 +211,6 @@
         </div>
 
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 @endsection
