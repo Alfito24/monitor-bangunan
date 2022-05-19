@@ -56,11 +56,12 @@
                                                             <th>Aksi</th>
                                                         </tr>
                                                     </thead>
+                                                    @foreach ($stakeholder as $s)
                                                     <tbody>
                                                         <tr>
-                                                            <td>183</td>
-                                                            <td>John Doe</td>
-                                                            <td>11-7-2014</td>
+                                                            <td>1</td>
+                                                            <td>{{$s->nama}}</td>
+                                                            <td>{{$s->peran}}</td>
                                                             <td>
                                                                 <button type="button" class="btn btn-success btn-sm">Edit</button>
                                                                  |
@@ -70,6 +71,7 @@
                                                             </td>
                                                         </tr>
                                                     </tbody>
+                                                    @endforeach
                                                 </table>
                                                 <a href="/regisstakeholders">Klik disini untuk tambah Stakeholder</a>
                                             </div>

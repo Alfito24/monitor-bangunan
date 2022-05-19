@@ -14,7 +14,7 @@ class DashboardController extends Controller
     public function index($id)
     {
         $users = User::where('id', $id)->first();
-        if (Auth::user()->kategori == 'pemilik') {
+        if (Auth::user()->peran == 'owner1' || Auth::user()->peran == 'owner2' || Auth::user()->peran == 'manajemen') {
             return view('dashboard.main', ['users'=>$users]);
         } else {
             abort(403);
@@ -23,7 +23,7 @@ class DashboardController extends Controller
     public function profil($id)
     {
         $users = DB::table('users')->where('id', $id)->first();
-        if (Auth::user()->kategori == 'pemilik') {
+        if (Auth::user()->peran == 'owner1' || Auth::user()->peran == 'owner2' || Auth::user()->peran == 'manajemen') {
             return view('dashboard.profil', compact('users'));
         } else {
             abort(403);
@@ -33,9 +33,10 @@ class DashboardController extends Controller
     public function menuUtama($proyekId)
     {
         $users = User::where('id', auth()->user()->id)->first();
+        $stakeholder = DB::table('proyek_user')->join('users', 'users.id', '=', 'proyek_user.user_id')->where('proyek_user.proyek_id', $proyekId)->get();
         $proyek = Proyek::where('id', $proyekId)->first();
-        if (Auth::user()->kategori == 'pemilik') {
-            return view('dashboard.menu-utama', compact('users','proyek'));
+        if (Auth::user()->peran == 'owner1' || Auth::user()->peran == 'owner2' || Auth::user()->peran == 'manajemen') {
+            return view('dashboard.menu-utama', compact('users','proyek', 'stakeholder'));
         } else {
             abort(403);
         }
@@ -44,7 +45,7 @@ class DashboardController extends Controller
     public function viewproyek($id)
     {
         $users = DB::table('users')->where('id', $id)->first();
-        if (Auth::user()->kategori == 'pemilik') {
+        if (Auth::user()->peran == 'owner1' || Auth::user()->peran == 'owner2' || Auth::user()->peran == 'manajemen') {
             return view('dashboard.tambahproyek', compact('users'));
         } else {
             abort(403);
@@ -53,7 +54,7 @@ class DashboardController extends Controller
     public function main($id)
     {
         $proyeks = DB::table('proyeks')->where('user_id', $id)->get();
-        if (Auth::user()->kategori == 'pemilik') {
+        if (Auth::user()->peran == 'owner1' || Auth::user()->peran == 'owner2' || Auth::user()->peran == 'manajemen') {
             return view('dashboard.main', compact('proyeks'));
         } else {
             abort(403);

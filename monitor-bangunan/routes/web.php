@@ -42,9 +42,10 @@ Route::post('/register', [StakeholdersController::class, 'store']); //nyimpan da
 Route::get('/survey', [SurveyController::class, 'show']);
 Route::post('/proyekform', [ProyekController::class, 'store']); //nyimpan data proyek
 
-Route::get('/pilihproyek/{userId}', [ProyekController::class, 'index']); //list proyek
+Route::get('/pilihproyek/{userId}', [ProyekController::class, 'index'])->name('pilihProyek'); //list proyek
 Route::get('/survey/proyek/{$id}', [SurveyController::class, 'index']);
 
 Route::get('/project', [ProyekController::class, 'show']); //halaman tambah proyek
 
+Route::post('/dashboard/menu_utama/{proyekId}/tambahStakeholder', [StakeholdersController::class, 'storeStakeholder']); //simpan stakeholder yang terlibat dalam proyek
 

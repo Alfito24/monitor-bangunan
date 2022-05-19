@@ -15,7 +15,11 @@
         <div class="col-4 justify-content-center">
             <div class="owl-carousel owl-theme">
                 <div class="item mb-4">
-                    <a href="/dashboard/menu_utama/{{ $p->id }}">
+                    <a @if (Auth::user()->peran == 'owner1' || Auth::user()->peran == 'owner2' || Auth::user()->peran == 'manajemen')
+                        href="/dashboard/menu_utama/{{ $p->id }}"
+                        @else
+                        href="/survey"
+                        @endif>
                         <div class="card border-0 shadow">
                             <img src="https://source.unsplash.com/400x300?building" alt="" class="card-img-top">
                             <div class="card-body">
@@ -32,9 +36,11 @@
         @endif
         @endforeach
     </div>
+    @if (Auth::user()->peran == 'owner1' || Auth::user()->peran == 'owner2' || Auth::user()->peran == 'manajemen')
     <div class="row">
         <a href="/project">Klik disini untuk tambah proyek</a>
     </div>
+    @endif
 </div>
 @endsection
 @section('footer')
