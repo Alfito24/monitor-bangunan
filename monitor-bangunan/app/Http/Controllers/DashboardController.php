@@ -34,7 +34,7 @@ class DashboardController extends Controller
     {
         $users = User::where('id', auth()->user()->id)->first();
         $stakeholder = DB::table('proyek_user')->join('users', 'users.id', '=', 'proyek_user.user_id')->where('proyek_user.proyek_id', $proyekId)->get();
-        $proyek = Proyek::where('id', $proyekId)->first();
+        $proyek = DB::table('proyeks')->where('id', $proyekId)->get();
         if (Auth::user()->peran == 'owner1' || Auth::user()->peran == 'owner2' || Auth::user()->peran == 'manajemen') {
             return view('dashboard.menu-utama', compact('users','proyek', 'stakeholder'));
         } else {

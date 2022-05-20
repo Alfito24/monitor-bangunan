@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
 
 class StakeholdersController extends Controller
 {
@@ -32,16 +33,23 @@ class StakeholdersController extends Controller
     }
 
     public function storeStakeholder(Request $request){
-     $users = DB::table('users')->get();
-     $email = $request->email;
-     foreach($users as $u){
-         if($u->email == $email){
-            DB::table('proyek_user')->insert([
+    $email = $request->email;
+    $users = DB::table('users')->where('users.email', $email)->get();
+    if(!$users){
+        return redirect()->back()->with('fail', 'Email tidak ditemukan');
+    }else{
+        foreach($users as $user){
+            DB::table('proyek_user')->insertGetId([
                 'proyek_id' => $request->proyekId,
-                'user_id' => $u->id,
+                'user_id' => $user->id,
             ]);
-         };
-     }
-     return 'success';
+        }
+         return redirect()->back();
+    }
+    }
+
+    public function hapusStakeholder($proyekId, $userId){
+        DB::table('proyek_user')->where([['user_id', $userId], ['proyek_id', $proyekId]])->delete();
+        return redirect()->back();
     }
 }
