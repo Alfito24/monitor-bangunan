@@ -32,7 +32,7 @@ class DashboardController extends Controller
 
     public function menuUtama($proyekId)
     {
-        $users = User::where('id', auth()->user()->id)->first();
+        $users = DB::table('users')->where('id', '=',  Auth::id())->first();
         $stakeholder = DB::table('proyek_user')->join('users', 'users.id', '=', 'proyek_user.user_id')->where('proyek_user.proyek_id', $proyekId)->get();
         $proyek = DB::table('proyeks')->where('id', $proyekId)->get();
         if (Auth::user()->peran == 'owner1' || Auth::user()->peran == 'owner2' || Auth::user()->peran == 'manajemen') {

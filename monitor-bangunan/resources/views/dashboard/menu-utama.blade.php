@@ -6,6 +6,7 @@
 <script src="js/dashboard/menu-utama.js"></script>
 @endsection
 @section('container')
+    @foreach ($proyek as $proyek)
     <div class="row">
         <div class="col-md-12">
             <div class="card card-primary">
@@ -57,19 +58,27 @@
                                                             <th>Aksi</th>
                                                         </tr>
                                                     </thead>
+                                                    @php
+                                                        $i = 1;
+                                                    @endphp
                                                     @foreach ($stakeholder as $s)
+                                                    @if ($s->id !== Auth::id())
                                                     <tbody>
                                                         <tr>
-                                                            <td>1</td>
+                                                            <td>{{$i}}</td>
                                                             <td>{{$s->nama}}</td>
                                                             <td>{{$s->peran}}</td>
                                                             <td>
                                                                 <button type="button" class="btn btn-info btn-sm">Detail</button>
                                                                 |
-                                                                <a href="/hapusStakeholder/{{$proyek->id}}/{{$s->id}}"><button type="button" class="btn btn-danger btn-sm">Delete</button></a>
+                                                                <a href="/hapusStakeholder/{{$proyek->id}}/{{$s->user_id}}"><button type="button" class="btn btn-danger btn-sm">Delete</button></a>
                                                             </td>
                                                         </tr>
                                                     </tbody>
+                                                    @php
+                                                        $i++;
+                                                    @endphp
+                                                    @endif
                                                     @endforeach
                                                 </table>
                                                 <button type="button" class="btn btn-primary mt-2" data-toggle="collapse" data-target="#demo">Klik di sini untuk menambah stakeholder</button>
@@ -219,8 +228,7 @@
         </div>
         <!-- /.card -->
     </div>
-
-    </div>
+    @endforeach
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 @endsection
