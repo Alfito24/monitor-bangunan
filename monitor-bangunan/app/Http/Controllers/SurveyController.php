@@ -16,4 +16,7 @@ class SurveyController extends Controller
            return view('survey');
         }
     }
+    public function fill(){
+        return view('isisurvey');
+    }
 }

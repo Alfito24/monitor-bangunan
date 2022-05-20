@@ -52,6 +52,18 @@
                     <div class="formbg">
                         <div class="formbg-inner padding-horizontal--48">
                             <span class="span-login padding-bottom--15">Sign in to your account</span>
+                            @if (session()->has('successs'))
+                                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                    {{ session('success') }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            @endif
+                            @if (session()->has('loginError'))
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    {{ session('loginError') }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            @endif
                             <form id="stripe-login" method="POST" action="/login">
                                 @csrf
                                 <div class="field padding-bottom--24">
