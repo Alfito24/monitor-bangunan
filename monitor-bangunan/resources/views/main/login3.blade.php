@@ -15,7 +15,7 @@
         <form method="POST" action="/login">
             @csrf
             <div class="form-title">
-                <h4>Sign in to your account</h4>
+                <h4>Sign in to your accounts</h4>
             </div>
             <div class="form-group">
                 <label for="email" class="form-label">Email</label>

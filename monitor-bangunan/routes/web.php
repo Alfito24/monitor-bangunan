@@ -39,7 +39,7 @@ Route::post('/logout', [LoginController::class, 'logout']);
 Route::get('/register', [StakeholdersController::class, 'show']); //halaman register
 Route::post('/register', [StakeholdersController::class, 'store']); //nyimpan data register
 
-Route::get('/survey', [SurveyController::class, 'show']);
+Route::get('/isisurvey', [SurveyController::class, 'fill']);
 Route::post('/proyekform', [ProyekController::class, 'store']); //nyimpan data proyek
 
 Route::get('/pilihproyek/{userId}', [ProyekController::class, 'index'])->name('pilihProyek'); //list proyek

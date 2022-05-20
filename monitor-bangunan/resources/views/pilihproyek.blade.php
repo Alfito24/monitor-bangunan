@@ -7,7 +7,7 @@
 
 <div class="container-fluid my-5 mt-5">
     <div class="text-center wow fadeInUp mt-5" data-wow-delay="0.1s">
-        <h1 class="mb-5">Pilih Proyek</h1>
+        <h1 class="mb-5">Pilih Bangunan</h1>
     </div>
     <div class="row">
         @foreach ($proyeks as $p )
@@ -18,7 +18,7 @@
                     <a @if (Auth::user()->peran == 'owner1' || Auth::user()->peran == 'owner2' || Auth::user()->peran == 'manajemen')
                         href="/dashboard/menu_utama/{{ $p->id }}"
                         @else
-                        href="/survey"
+                        href="/isisurvey"
                         @endif>
                         <div class="card border-0 shadow">
                             <img src="https://source.unsplash.com/400x300?building" alt="" class="card-img-top">
@@ -37,8 +37,8 @@
         @endforeach
     </div>
     @if (Auth::user()->peran == 'owner1' || Auth::user()->peran == 'owner2' || Auth::user()->peran == 'manajemen')
-    <div class="row">
-        <a href="/project">Klik disini untuk tambah proyek</a>
+    <div class="row d-flex justify-content-center" style="margin-bottom: 395px">
+        <div class="col-12"><a href="/project" class="btn btn-primary">Klik disini untuk tambah proyek</a></div>
     </div>
     @endif
 </div>

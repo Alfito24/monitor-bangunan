@@ -6,25 +6,25 @@
 <script src="js/dashboard/menu-utama.js"></script>
 @endsection
 @section('container')
-@foreach ($proyek as $proyek)
-<div class="row">
-    <div class="col-md-12">
-        <div class="card card-primary">
-            <div class="card-header">
-                <ul class="nav nav-tabs">
-                    <li class="cycle-tab-item active">
-                        <a class="nav-link" role="tab" data-toggle="tab" href="#stakeholder">Stakeholder</a>
-                    </li>
-                    <li class="cycle-tab-item">
-                        <a class="nav-link" role="tab" data-toggle="tab" href="#variabel">Variabel</a>
-                    </li>
-                    <li class="cycle-tab-item">
-                        <a class="nav-link" role="tab" data-toggle="tab" href="#survey">Survey</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="card-body">
-                <div class="cycle-tab-container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <ul class="nav nav-tabs">
+                        <li class="cycle-tab-item active">
+                            <a class="nav-link" role="tab" data-toggle="tab" href="#stakeholder">Stakeholder</a>
+                        </li>
+                        <li class="cycle-tab-item">
+                            <a class="nav-link" role="tab" data-toggle="tab" href="#variabel">Survey</a>
+                        </li>
+                        <li class="cycle-tab-item">
+                            <a class="nav-link" role="tab" data-toggle="tab" href="#survey">Hasil Survey</a>
+                        </li>
+                    </ul>
+
+                </div>
+                <div class="card-body">
+                    <div class="cycle-tab-container">
 
                     <div class="tab-content">
                         <div class="tab-pane fade" id="stakeholder" role="tabpanel" aria-labelledby="profile-tab">
@@ -125,23 +125,25 @@
                                                     <thead>
                                                         <tr>
                                                             <th>No</th>
-                                                            <th>Variabel</th>
-                                                            <th>Aksi</th>
+                                                            <th>Nama Survey</th>
+                                                            <th>Tanggal Dimulai</th>
+                                                            <th>Tanggal Berakhir</th>
+                                                            <th>Status</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                         <tr>
                                                             <td>1</td>
-                                                            <td>xxxx</td>
-                                                            <td> <button type="button"
-                                                                class="btn btn-success btn-sm">Add</button></td>
+                                                            <td>Survey Sekolah</td>
+                                                            <td>2022-05-07</td>
+                                                            <td>2022-07-07</td>
+                                                            <td> <a
+                                                                    class="btn btn-success btn-sm text-light" href="/isisurvey">Available</a></td>
 
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                    <a href="/">Klik disini untuk tambah Variabel</a>
-                                                </div>
-                                                <!-- /.card-body -->
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <a href="/" class="btn btn-primary">Klik di sini untuk menambah survey</a>
                                             </div>
                                             <!-- /.card -->
                                         </div>
@@ -209,8 +211,16 @@
                         <!-- /.card -->
                     </div>
 
+
+
                 </div>
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-                @endforeach
-                @endsection
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+@endsection
