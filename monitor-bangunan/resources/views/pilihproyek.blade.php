@@ -38,7 +38,7 @@
     </div>
     @if (Auth::user()->peran == 'owner1' || Auth::user()->peran == 'owner2' || Auth::user()->peran == 'manajemen')
     <div class="row d-flex justify-content-center" style="margin-bottom: 395px">
-        <div class="col-12"><a href="/project" class="btn btn-primary">Klik disini untuk tambah proyek</a></div>
+        <div class="col-12"><a href="/project" class="btn btn-primary">Klik disini untuk menambah bangunan</a></div>
     </div>
     @endif
 </div>
