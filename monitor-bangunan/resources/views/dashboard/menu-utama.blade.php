@@ -69,7 +69,7 @@
                                                             <td>{{$s->nama}}</td>
                                                             <td>{{$s->peran}}</td>
                                                             <td>
-                                                                <button type="button" class="btn btn-info btn-sm">Detail</button>
+                                                                <a href="/dashboard/profil/{{$proyek->id}}/{{$s->user_id}}"><button type="button" class="btn btn-info btn-sm">Detail</button></a>
                                                                 |
                                                                 <a href="/hapusStakeholder/{{$proyek->id}}/{{$s->user_id}}"><button type="button" class="btn btn-danger btn-sm">Delete</button></a>
                                                             </td>

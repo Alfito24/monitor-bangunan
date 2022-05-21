@@ -20,11 +20,12 @@ class DashboardController extends Controller
             abort(403);
         }
     }
-    public function profil($id)
+    public function profil($proyekId, $userId)
     {
-        $users = DB::table('users')->where('id', $id)->first();
+        $users = DB::table('users')->where('id', $userId)->first();
+        $proyek = DB::table('proyeks')->where('id', $proyekId)->first();
         if (Auth::user()->peran == 'owner1' || Auth::user()->peran == 'owner2' || Auth::user()->peran == 'manajemen') {
-            return view('dashboard.profil', compact('users'));
+            return view('dashboard.profil', compact('users', 'proyek'));
         } else {
             abort(403);
         }

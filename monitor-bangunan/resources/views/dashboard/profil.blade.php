@@ -1,4 +1,4 @@
-@extends('dashboard.master')
+@extends('dashboard.master', ['proyekId' => $proyek])
 @section('container')
     <div class="row">
         <div class="col-md-12">
@@ -42,12 +42,13 @@
         </div>
 
     </div>
+    @if ($users->id == Auth::id())
     <div class="row ">
         <div class="col-12 mb-3">
-
             <a href="/updateprofil" class="btn btn-success float-right">Edit Profil</a>
         </div>
     </div>
+    @endif
     <!-- /.row -->
     <!-- Main row -->
 @endsection
