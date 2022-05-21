@@ -99,73 +99,8 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    </form>
                                                 </div>
-                                                <!-- /.card-header -->
-                                                <div class="card-body table-responsive p-0" style="height: 300px;">
-                                                    <table class="table table-head-fixed text-nowrap">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>No</th>
-                                                                <th>Nama Stakeholder</th>
-                                                                <th>Peran</th>
-                                                                <th>Aksi</th>
-                                                            </tr>
-                                                        </thead>
-                                                        @php
-                                                            $i = 1;
-                                                        @endphp
-                                                        @foreach ($stakeholder as $s)
-                                                            @if ($s->id !== Auth::id())
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td>{{ $i }}</td>
-                                                                        <td>{{ $s->nama }}</td>
-                                                                        <td>{{ $s->peran }}</td>
-                                                                        <td>
-                                                                            <button type="button"
-                                                                                class="btn btn-info btn-sm">Detail</button>
-                                                                            |
-                                                                            <a
-                                                                                href="/hapusStakeholder/{{ $proyek->id }}/{{ $s->user_id }}"><button
-                                                                                    type="button"
-                                                                                    class="btn btn-danger btn-sm">Delete</button></a>
-                                                                        </td>
-                                                                    </tr>
-                                                                </tbody>
-                                                                @php
-                                                                    $i++;
-                                                                @endphp
-                                                            @endif
-                                                        @endforeach
-                                                    </table>
-                                                    <button type="button" class="btn btn-primary mt-2"
-                                                        data-toggle="collapse" data-target="#demo">Klik di sini untuk
-                                                        menambah stakeholder</button>
-                                                    <div id="demo" class="collapse container">
-                                                        <form action="/tambahStakeholder" method="POST">
-                                                            <div class="row">
-                                                                <div class="col-4">
-                                                                    <div class="mb-3 mt-3">
-                                                                        @csrf
-                                                                        <label for="email" class="form-label">Email
-                                                                            Stakeholder</label>
-                                                                        <input type="email" class="form-control"
-                                                                            id="email" aria-describedby="emailHelp"
-                                                                            name="email">
-                                                                        <input type="hidden" id="proyekId" name="proyekId"
-                                                                            value="{{ $proyek->id }}">
-                                                                        <button type="submit" id="buttonStoreStakeholder"
-                                                                            class="btn btn-primary mt-2">Simpan</button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <p>{!! \Session::get('success') !!}</p>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-
                                             </div>
                                             <!-- /.card-body -->
                                         </div>
