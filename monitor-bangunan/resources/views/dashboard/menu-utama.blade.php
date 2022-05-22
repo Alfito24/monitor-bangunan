@@ -22,7 +22,6 @@
                                 <a class="nav-link" role="tab" data-toggle="tab" href="#survey">Hasil Survey</a>
                             </li>
                         </ul>
-
                     </div>
                     <div class="card-body">
                         <div class="cycle-tab-container">
@@ -120,8 +119,7 @@
                                         <div class="col-12">
                                             <div class="card">
                                                 <div class="card-header">
-                                                    <h3 class="card-title">Data Variabel</h3>
-
+                                                    <h3 class="card-title">Data Survey</h3>
                                                     <div class="card-tools">
                                                         <div class="input-group input-group-sm" style="width: 150px;">
                                                             <input type="text" name="table_search"
@@ -158,8 +156,58 @@
                                                             </tr>
                                                         </tbody>
                                                     </table>
-                                                    <a href="/" class="btn btn-primary">Klik di sini untuk menambah
-                                                        survey</a>
+                                                    <button style="margin-left:10px" type="button" class="btn btn-primary mt-2"
+                                                        data-toggle="collapse" data-target="#demo">Klik di sini untuk
+                                                        menambah survey</button>
+                                                    <div id="demo" class="collapse container">
+                                                        <form action="/tambahStakeholder" method="POST">
+                                                            @csrf
+                                                            <div class="row">
+                                                                <div class="col-4">
+                                                                    <div class="mb-3 mt-3">
+                                                                        <label for="email" class="form-label">Nama Survey</label>
+                                                                        <input type="email" class="form-control"
+                                                                            id="email" aria-describedby="emailHelp"
+                                                                            name="email">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-4">
+                                                                    <div class="mb-3 mt-3">
+                                                                        <label for="tanggalMulai" class="form-label">Tanggal Dimulai</label>
+                                                                        <input type="date" class="form-control"
+                                                                            id="tanggalMulai" aria-describedby="emailHelp"
+                                                                            name="tanggalMulai">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-4">
+                                                                    <div class="mb-3 mt-3">
+                                                                        <label for="tanggalBerakhir" class="form-label">Tanggal Berakhir</label>
+                                                                        <input type="date" class="form-control"
+                                                                            id="tanggalBerakhir" aria-describedby="emailHelp"
+                                                                            name="tanggalBerakhir">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row" >
+                                                                <div class="col-8">
+                                                                    <div class="form-group">
+                                                                        <label><strong>Variabel :</strong></label><br>
+                                                                        <label><input type="checkbox" name="category[]" value="Laravel"> Variabel 1</label> <br>
+                                                                        <label><input type="checkbox" name="category[]" value="JQuery"> Variabel 2</label> <br>
+                                                                        <label><input type="checkbox" name="category[]" value="Bootstrap"> Variabel 3</label> <br>
+                                                                        <label><input type="checkbox" name="category[]" value="Codeigniter"> Variabel 4</label> <br>
+                                                                        <label><input type="checkbox" name="category[]" value="JQuery UI"> Variabel 5</label>
+                                                                    </div>  
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mb-3" >
+                                                                <div class="col-4">
+                                                                    <button type="submit" id="buttonStoreStakeholder"
+                                                                            class="btn btn-primary mt-2">Simpan</button>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
                                                 </div>
                                                 <!-- /.card -->
                                             </div>

@@ -24,7 +24,7 @@ class LoginController extends Controller
             $request->session()->regenerate();
             $id = auth()->user()->id;
             // return redirect()->route('pilihProyek',['userId'=>auth()->user()->id]);
-            return redirect('/pilihproyek/'.$id);
+            return redirect('/pilihbangunan/'.$id);
         }
         return back()->with('loginError', 'Login Failed');
     }
