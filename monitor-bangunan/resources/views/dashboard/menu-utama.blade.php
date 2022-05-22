@@ -57,14 +57,12 @@
                                                                 <th>Aksi</th>
                                                             </tr>
                                                         </thead>
-                                                        @php
-                                                            $i = 1;
-                                                        @endphp
+                                                       
                                                         @foreach ($stakeholder as $s)
                                                             @if ($s->id !== Auth::id())
                                                                 <tbody>
                                                                     <tr>
-                                                                        <td>{{ $i }}</td>
+                                                                        <td>{{ $loop->iteration }}</td>
                                                                         <td>{{ $s->nama }}</td>
                                                                         <td>{{ $s->peran }}</td>
                                                                         <td>
@@ -80,9 +78,6 @@
                                                                         </td>
                                                                     </tr>
                                                                 </tbody>
-                                                                @php
-                                                                    $i++;
-                                                                @endphp
                                                             @endif
                                                         @endforeach
                                                     </table>
