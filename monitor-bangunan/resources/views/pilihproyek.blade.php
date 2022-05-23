@@ -10,9 +10,14 @@
         <h1 class="mb-5">Pilih Bangunan</h1>
     </div>
     @if(count($proyeks)==0)
-    <h1 class="text-center" style="margin-bottom: 370px">
+    <h1 class="text-center">
         Maaf, bangunan tidak tersedia
     </h1>
+    @endif
+    @if (Auth::user()->peran == 'owner1' || Auth::user()->peran == 'owner2' || Auth::user()->peran == 'manajemen' && (count($proyeks)==0))
+    <div class="row d-flex justify-content-center mb-4">
+        <div class="col-12"><a href="/project" class="btn btn-primary">Klik disini untuk menambah bangunan</a></div>
+    </div>
     @endif
     <div class="row">
         @foreach ($proyeks as $p )
@@ -41,11 +46,7 @@
         @endif
         @endforeach
     </div>
-    @if (Auth::user()->peran == 'owner1' || Auth::user()->peran == 'owner2' || Auth::user()->peran == 'manajemen')
-    <div class="row d-flex justify-content-center" style="margin-bottom: 395px">
-        <div class="col-12"><a href="/project" class="btn btn-primary">Klik disini untuk menambah bangunan</a></div>
-    </div>
-    @endif
+   
 </div>
 @endsection
 @section('footer')

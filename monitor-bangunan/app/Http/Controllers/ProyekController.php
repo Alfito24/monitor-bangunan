@@ -24,7 +24,8 @@ class ProyekController extends Controller
         $proyek->keteranganProyek = $request->keterangan;
         $proyek->save();
         $proyek->stakeholder()->attach(auth()->user()->id);
-        return redirect('dashboard/menu_utama/{proyekId}', 302, ['proyekId'=>$proyek->id]);
+        // return redirect('dashboard/menu_utama/{proyekId}', 302, ['proyekId'=>$proyek->id]);
+        return redirect('dashboard/menu_utama/'.$proyek->id);
     }
     public function index($userId){
         $proyeks = DB::table('proyek_user')->join('proyeks', 'proyek_user.proyek_id', '=', 'proyeks.id')->get();
