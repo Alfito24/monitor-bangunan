@@ -9,6 +9,11 @@
     <div class="text-center wow fadeInUp mt-5" data-wow-delay="0.1s">
         <h1 class="mb-5">Pilih Bangunan</h1>
     </div>
+    @if(count($proyeks)==0)
+    <h1 class="text-center" style="margin-bottom: 370px">
+        Maaf, bangunan tidak tersedia
+    </h1>
+    @endif
     <div class="row">
         @foreach ($proyeks as $p )
         @if ($p->user_id === auth()->user()->id)
