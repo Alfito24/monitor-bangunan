@@ -14,10 +14,16 @@ class Proyek extends Model
     protected $guarded = [
         'id'
     ];
-    public function stakeholder(){
+    public function stakeholder()
+    {
         return $this->belongsToMany(User::class);
     }
-    public function variabel(){
+    public function variabel()
+    {
         return $this->belongsToMany(Variabel::class);
+    }
+    public function survey()
+    {
+        return $this->belongsToMany(Survey::class, 'proyek_id');
     }
 }

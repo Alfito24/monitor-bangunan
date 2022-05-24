@@ -19,7 +19,7 @@ class CreateSurveyUserTable extends Migration
             $table->bigInteger('survey_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('survey_id')->references('id')->on('surveys')->onDelete('cascade');
-            $table->integer('status');
+            $table->integer('status')->default('1');
             $table->timestamps();
         });
     }

@@ -40,6 +40,9 @@ Route::get('/register', [StakeholdersController::class, 'show']); //halaman regi
 Route::post('/register', [StakeholdersController::class, 'store']); //nyimpan data register
 
 Route::get('/isisurvey', [SurveyController::class, 'fill']);
+Route::post('/tambahSurvey', [SurveyController::class, 'storeSurvey']); //simpan survey
+
+
 Route::post('/proyekform', [ProyekController::class, 'store']); //nyimpan data proyek
 
 Route::get('/pilihbangunan/{userId}', [ProyekController::class, 'index'])->name('pilihProyek'); //list proyek

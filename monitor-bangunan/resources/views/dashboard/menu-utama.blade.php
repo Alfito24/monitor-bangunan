@@ -56,7 +56,7 @@
                                                                 <th>Aksi</th>
                                                             </tr>
                                                         </thead>
-                                                       
+
                                                         @foreach ($stakeholder as $s)
                                                             @if ($s->id !== Auth::id())
                                                                 <tbody>
@@ -80,35 +80,35 @@
                                                             @endif
                                                         @endforeach
                                                     </table>
-                                                    <button type="button" class="btn btn-primary mt-2"
-                                                        data-toggle="collapse" data-target="#demo">Klik di sini untuk
-                                                        menambah stakeholder</button>
-                                                    <div id="demo" class="collapse container">
-                                                        <form action="/tambahStakeholder" method="POST">
-                                                            <div class="row">
-                                                                <div class="col-4">
-                                                                    <div class="mb-3 mt-3">
-                                                                        @csrf
-                                                                        <label for="email" class="form-label">Email
-                                                                            Stakeholder</label>
-                                                                        <input type="email" class="form-control"
-                                                                            id="email" aria-describedby="emailHelp"
-                                                                            name="email">
-                                                                        <input type="hidden" id="proyekId" name="proyekId"
-                                                                            value="{{ $proyek->id }}">
-                                                                        <button type="submit" id="buttonStoreStakeholder"
-                                                                            class="btn btn-primary mt-2">Simpan</button>
-                                                                    </div>
-                                                                    <div class="input-group-append">
-                                                                        <button type="submit" class="btn btn-default"><i
-                                                                                class="fas fa-search"></i></button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </form>
-                                                    </div>
+
                                                 </div>
                                                 <!-- /.card-body -->
+                                            </div>
+                                            <button type="button" class="btn btn-primary mt-2" data-toggle="collapse"
+                                                data-target="#demo">Klik di sini untuk
+                                                menambah stakeholder</button>
+                                            <div id="demo" class="collapse container">
+                                                <form action="/tambahStakeholder" method="POST">
+                                                    <div class="row">
+                                                        <div class="col-4">
+                                                            <div class="mb-3 mt-3">
+                                                                @csrf
+                                                                <label for="email" class="form-label">Email
+                                                                    Stakeholder</label>
+                                                                <input type="email" class="form-control" id="email"
+                                                                    aria-describedby="emailHelp" name="email">
+                                                                <input type="hidden" id="proyekId" name="proyekId"
+                                                                    value="{{ $proyek->id }}">
+                                                                <button type="submit" id="buttonStoreStakeholder"
+                                                                    class="btn btn-primary mt-2">Simpan</button>
+                                                            </div>
+                                                            <div class="input-group-append">
+                                                                <button type="submit" class="btn btn-default"><i
+                                                                        class="fas fa-search"></i></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
                                             </div>
                                             <!-- /.card -->
                                         </div>
@@ -144,72 +144,98 @@
                                                                 <th>Status</th>
                                                             </tr>
                                                         </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>1</td>
-                                                                <td>Survey Sekolah</td>
-                                                                <td>2022-05-07</td>
-                                                                <td>2022-07-07</td>
-                                                                <td> <a class="btn btn-success btn-sm text-light"
-                                                                        href="/isisurvey">Available</a></td>
 
-                                                            </tr>
-                                                        </tbody>
+                                                        @foreach ($survey as $sv)
+                                                            @if ($sv->id !== Auth::id())
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>{{ $loop->iteration }}</td>
+                                                                        <td>{{ $sv->nama_survey }}</td>
+                                                                        <td>{{ date('d-m-Y', strtotime($sv->tanggal_dibuat)) }}
+                                                                        </td>
+                                                                        <td>{{ date('d-m-Y', strtotime($sv->tanggal_kadaluwarsa)) }}
+                                                                        </td>
+                                                                        @if ($sv->status == '1')
+                                                                            <td>
+                                                                                <h6><span class="badge bg-secondary">Belum
+                                                                                        Diisi</span></h6>
+                                                                            </td>
+                                                                        @elseif($sv->status == '2')
+                                                                            <td><span class="badge bg-success">Sudah
+                                                                                    Diisi</span>
+                                                                            </td>
+                                                                        @else
+                                                                            <td><span class="badge bg-danger">Expired
+                                                                                </span>
+                                                                            </td>
+                                                                        @endif
+
+                                                                    </tr>
+                                                                </tbody>
+                                                            @endif
+                                                        @endforeach
+
+
                                                     </table>
-                                                    <button style="margin-left:10px" type="button" class="btn btn-primary mt-2"
-                                                        data-toggle="collapse" data-target="#demo">Klik di sini untuk
-                                                        menambah survey</button>
-                                                    <div id="demo" class="collapse container">
-                                                        <form action="/tambahStakeholder" method="POST">
-                                                            @csrf
-                                                            <div class="row">
-                                                                <div class="col-4">
-                                                                    <div class="mb-3 mt-3">
-                                                                        <label for="email" class="form-label">Nama Survey</label>
-                                                                        <input type="email" class="form-control"
-                                                                            id="email" aria-describedby="emailHelp"
-                                                                            name="email">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-4">
-                                                                    <div class="mb-3 mt-3">
-                                                                        <label for="tanggalMulai" class="form-label">Tanggal Dimulai</label>
-                                                                        <input type="date" class="form-control"
-                                                                            id="tanggalMulai" aria-describedby="emailHelp"
-                                                                            name="tanggalMulai">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-4">
-                                                                    <div class="mb-3 mt-3">
-                                                                        <label for="tanggalBerakhir" class="form-label">Tanggal Berakhir</label>
-                                                                        <input type="date" class="form-control"
-                                                                            id="tanggalBerakhir" aria-describedby="emailHelp"
-                                                                            name="tanggalBerakhir">
-                                                                    </div>
-                                                                </div>
+
+                                                </div>
+                                                <!-- /.card -->
+                                            </div>
+                                            <button style="margin-left:10px" type="button" class="btn btn-primary mt-2"
+                                                data-toggle="collapse" data-target="#demo">Klik di sini untuk
+                                                menambah survey</button>
+                                            <div id="demo" class="collapse container">
+                                                <form action="/tambahSurvey" method="POST">
+                                                    @csrf
+                                                    <div class="row">
+                                                        <input type="hidden" name="proyek_id" id="proyek_id"
+                                                            value="{{ $proyek->id }}">
+                                                        <div class="  col-4">
+                                                            <div class="mb-3 mt-3">
+                                                                <label for="nama_survey" class="form-label">Nama
+                                                                    Survey</label>
+                                                                <input type="text" class="form-control" id="nama_survey"
+                                                                    aria-describedby="emailHelp" name="nama_survey">
                                                             </div>
-                                                            <div class="row" >
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <div class="mb-3 mt-3">
+                                                                <label for="tanggalMulai" class="form-label">Tanggal
+                                                                    Dimulai</label>
+                                                                <input type="date" class="form-control" id="tanggalMulai"
+                                                                    aria-describedby="emailHelp" name="tanggal_dibuat">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <div class="mb-3 mt-3">
+                                                                <label for="tanggalBerakhir" class="form-label">Tanggal
+                                                                    Berakhir</label>
+                                                                <input type="date" class="form-control"
+                                                                    id="tanggalBerakhir" aria-describedby="emailHelp"
+                                                                    name="tanggal_kadaluwarsa">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    {{-- <div class="row">
                                                                 <div class="col-8">
                                                                     <div class="form-group">
                                                                         <label><strong>Variabel :</strong></label><br>
-                                                                        <label><input type="checkbox" name="category[]" value="Laravel"> Variabel 1</label> <br>
-                                                                        <label><input type="checkbox" name="category[]" value="JQuery"> Variabel 2</label> <br>
-                                                                        <label><input type="checkbox" name="category[]" value="Bootstrap"> Variabel 3</label> <br>
-                                                                        <label><input type="checkbox" name="category[]" value="Codeigniter"> Variabel 4</label> <br>
-                                                                        <label><input type="checkbox" name="category[]" value="JQuery UI"> Variabel 5</label>
-                                                                    </div>  
+                                                                        @foreach ($listVariabel as $list)
+                                                                            <label><input type="checkbox" name="category[]"
+                                                                                    value="{{ $list->id }}">{{ $list->isiVariabel }}</label>
+                                                                            <br>
+                                                                        @endforeach
+
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="row mb-3" >
-                                                                <div class="col-4">
-                                                                    <button type="submit" id="buttonStoreStakeholder"
-                                                                            class="btn btn-primary mt-2">Simpan</button>
-                                                                </div>
-                                                            </div>
-                                                        </form>
+                                                            </div> --}}
+                                                    <div class="row mb-3">
+                                                        <div class="col-4">
+                                                            <button type="submit" id="buttonStoreStakeholder"
+                                                                class="btn btn-primary mt-2">Simpan</button>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <!-- /.card -->
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
@@ -220,11 +246,11 @@
                                         <!-- general form elements -->
                                         <div class="card card-primary">
                                             <div class="card-header">
-                                                <h3 class="card-title">Tambah Survey
+                                                <h3 class="card-title">Hasil Survey
                                             </div>
                                             <!-- /.card-header -->
                                             <!-- form start -->
-                                            <form role="form">
+                                            {{-- <form role="form">
                                                 <div class="card-body">
                                                     <div class="form-group">
                                                         <label for="exampleInputEmail1">Email address</label>
@@ -262,7 +288,7 @@
                                                 <div class="card-footer">
                                                     <button type="submit" class="btn btn-primary">Submit</button>
                                                 </div>
-                                            </form>
+                                            </form> --}}
                                         </div>
                                         <!-- /.card -->
                                     </div>

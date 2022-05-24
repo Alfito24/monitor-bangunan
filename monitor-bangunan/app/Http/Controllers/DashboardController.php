@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Proyek;
+use App\Models\Survey;
 use App\Models\User;
+use App\Models\Variabel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -15,7 +17,7 @@ class DashboardController extends Controller
     {
         $users = User::where('id', $id)->first();
         if (Auth::user()->peran == 'owner1' || Auth::user()->peran == 'owner2' || Auth::user()->peran == 'manajemen') {
-            return view('dashboard.main', ['users'=>$users]);
+            return view('dashboard.main', ['users' => $users]);
         } else {
             abort(403);
         }
@@ -36,8 +38,20 @@ class DashboardController extends Controller
         $users = DB::table('users')->where('id', '=',  Auth::id())->first();
         $stakeholder = DB::table('proyek_user')->join('users', 'users.id', '=', 'proyek_user.user_id')->where('proyek_user.proyek_id', $proyekId)->get();
         $proyek = DB::table('proyeks')->where('id', $proyekId)->get();
+        $survey = DB::table('surveys')
+            ->join('survey_user', 'survey_user.survey_id', '=', 'surveys.id')
+            ->join('proyek_survey', 'proyek_survey.survey_id', '=', 'surveys.id')
+            ->where('proyek_survey.proyek_id', $proyekId)
+            ->get();
+        $listVariabel = Variabel::all();
         if (Auth::user()->peran == 'owner1' || Auth::user()->peran == 'owner2' || Auth::user()->peran == 'manajemen') {
-            return view('dashboard.menu-utama', compact('users','proyek', 'stakeholder'));
+            return view(
+                'dashboard.menu-utama',
+                compact('users', 'proyek', 'stakeholder', 'survey'),
+                [
+                    'listVariabel' => $listVariabel
+                ]
+            );
         } else {
             abort(403);
         }
