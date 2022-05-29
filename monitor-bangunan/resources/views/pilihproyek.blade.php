@@ -14,11 +14,7 @@
         Maaf, bangunan tidak tersedia
     </h1>
     @endif
-    @if (Auth::user()->peran == 'owner1' || Auth::user()->peran == 'owner2' || Auth::user()->peran == 'manajemen' && (count($proyeks)==0))
-    <div class="row d-flex justify-content-center mb-4">
-        <div class="col-12"><a href="/project" class="btn btn-primary">Klik disini untuk menambah bangunan</a></div>
-    </div>
-    @endif
+
     <div class="row">
         @foreach ($proyeks as $p )
         @if ($p->user_id === auth()->user()->id)
@@ -28,7 +24,7 @@
                     <a @if (Auth::user()->peran == 'owner1' || Auth::user()->peran == 'owner2' || Auth::user()->peran == 'manajemen')
                         href="/dashboard/menu_utama/{{ $p->id }}"
                         @else
-                        href="/isisurvey"
+                        href="{{route('pilihSurvey', ['proyekId' => $p->id])}}"
                         @endif>
                         <div class="card border-0 shadow">
                             <img src="https://source.unsplash.com/400x300?building" alt="" class="card-img-top">
@@ -46,7 +42,11 @@
         @endif
         @endforeach
     </div>
-   
+    @if (Auth::user()->peran == 'owner1' || Auth::user()->peran == 'owner2' || Auth::user()->peran == 'manajemen' && (count($proyeks)==0))
+    <div class="row d-flex justify-content-center mb-4">
+        <div class="col-12"><a href="/project" class="btn btn-primary">Klik disini untuk menambah bangunan</a></div>
+    </div>
+    @endif
 </div>
 @endsection
 @section('footer')
