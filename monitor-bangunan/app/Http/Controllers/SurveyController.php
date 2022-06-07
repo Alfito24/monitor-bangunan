@@ -26,6 +26,7 @@ class SurveyController extends Controller
 
     public function storeSurvey(Request $request)
     {
+        dd($request->all());
         $idProyek = $request->proyek_id;
         // store surveys
         $survey = new Survey();

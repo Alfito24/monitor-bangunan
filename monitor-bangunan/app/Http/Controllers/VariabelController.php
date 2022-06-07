@@ -5,21 +5,24 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Variabel;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Datetime;
 
 
 class VariabelController extends Controller
 {
-    public function tambah($idproyek, $idstakeholder){
+    public function tambah($idproyek, $idstakeholder)
+    {
         $variabels = Variabel::all();
 
-        return view('tambahVariabel', ['idproyek' => $idproyek, 'idstakeholder'=>$idstakeholder, 'variabels'=>$variabels]);
+        return view('tambahVariabel', ['idproyek' => $idproyek, 'idstakeholder' => $idstakeholder, 'variabels' => $variabels]);
     }
 
-    public function simpan(Request $request){
+    public function simpan(Request $request)
+    {
         $createdAt = new DateTime();
 
-        $this->validate($request,[
+        $this->validate($request, [
             'variabel_id' => 'required'
         ]);
 
@@ -32,7 +35,8 @@ class VariabelController extends Controller
         ]);
     }
 
-    public function tampilVariabel(){
+    public function tampilVariabel()
+    {
         $variabels = Variabel::all();
     }
 }

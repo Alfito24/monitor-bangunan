@@ -3,6 +3,41 @@
 <link href="css/dashboard/menu-utama.css" rel="stylesheet">
 @endsection
 @section('js')
+    <script src="js/dashboard/menu-utama.js"></script>
+    <script>
+        function verifyAnswer() {
+            //get the selected value from the dropdown list
+            var x = "myAns";
+            var mylist = document.getElementById(x);
+            var result = mylist.options[mylist.selectedIndex].text;
+            if (result == 'No') {
+                //disable all the radio button
+                document.getElementById("e1").disabled = true;
+                document.getElementById("e2").disabled = true;
+                document.getElementById("e3").disabled = true;
+                document.getElementById("e4").disabled = true;
+                document.getElementById("e5").disabled = true;
+                document.getElementById("r1").disabled = true;
+                document.getElementById("r2").disabled = true;
+                document.getElementById("r3").disabled = true;
+                document.getElementById("r4").disabled = true;
+                document.getElementById("r5").disabled = true;
+            } else {
+                //enable all the radio button
+                document.getElementById("e1").disabled = false;
+                document.getElementById("e2").disabled = false;
+                document.getElementById("e3").disabled = false;
+                document.getElementById("e4").disabled = false;
+                document.getElementById("e5").disabled = false;
+                document.getElementById("r1").disabled = false;
+                document.getElementById("r2").disabled = false;
+                document.getElementById("r3").disabled = false;
+                document.getElementById("r4").disabled = false;
+                document.getElementById("r5").disabled = false;
+            }
+        }
+    </script>
+    </script>
 <script src="js/dashboard/menu-utama.js"></script>
 @endsection
 @section('container')
@@ -182,6 +217,81 @@
                                                             </table>
 
                                                         </div>
+                                                        <div class="col-12">
+                                                            <div class="mt-3">
+                                                                <label for="variabelAssign"
+                                                                    class="form-label">Variabel</label>
+                                                            </div>
+                                                            @foreach ($listVariabel as $lv)
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="{{ $lv->id }}" name="id[]"
+                                                                        id="flexCheckDefault">
+                                                                    <label class="form-check-label" for="flexCheckDefault">
+                                                                        {{ $lv->isiVariabel }}
+                                                                    </label>
+                                                                </div>
+                                                            @endforeach
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row mb-3">
+                                                        <div class="col-4">
+                                                            <button type="submit" id="buttonStoreStakeholder"
+                                                                class="btn btn-primary mt-2">Simpan</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                                {{-- variabel --}}
+                                                <div class="card-body table-responsive p-0" style="height: 300px;">
+                                                    <table class="table table-head-fixed text-nowrap">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>No</th>
+                                                                <th>Deskripsi</th>
+                                                                <th>Relevansi</th>
+                                                                <th>Ekspektasi</th>
+                                                                <th>Realita</th>
+                                                            </tr>
+                                                        </thead>
+
+                                                        @foreach ($survey as $sv)
+                                                            @if ($sv->id !== Auth::id())
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>{{ $loop->iteration }}</td>
+                                                                        <td>{{ $sv->nama_survey }}</td>
+                                                                        <td>{{ date('d-m-Y', strtotime($sv->tanggal_dibuat)) }}
+                                                                        </td>
+                                                                        <td>{{ date('d-m-Y', strtotime($sv->tanggal_kadaluwarsa)) }}
+                                                                        </td>
+                                                                        @if ($sv->status == '1')
+                                                                            <td>
+                                                                                <h6><span class="badge bg-secondary">Belum
+                                                                                        Diisi</span></h6>
+                                                                            </td>
+                                                                        @elseif($sv->status == '2')
+                                                                            <td><span class="badge bg-success">Sudah
+                                                                                    Diisi</span>
+                                                                            </td>
+                                                                        @else
+                                                                            <td><span class="badge bg-danger">Expired
+                                                                                </span>
+                                                                            </td>
+                                                                        @endif
+
+                                                                    </tr>
+                                                                </tbody>
+                                                            @endif
+                                                        @endforeach
+
+
+                                                    </table>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                                         <!-- /.card -->
                                                     </div>
                                                     <button style="margin-left:10px" type="button" class="btn btn-primary mt-2"
@@ -314,7 +424,73 @@
                                                 <!-- /.card -->
                                             </div>
                                         </div>
-                                        @endforeach
-                                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-                                        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-                                        @endsection
+
+                                        <!-- /.card -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+    @endforeach
+    <section class="variabel-relevansi">
+        <h5>Relevansi Variabel</h5>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Deskripsi</th>
+                    <th scope="col">Relevansi</th>
+                    <th scope="col">Ekspektasi</th>
+                    <th scope="col">Realita</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($listVariabel as $lv)
+                    <tr>
+                        <th scope="row">{{ $lv->id }}</th>
+                        <td>{{ $lv->isiVariabel }}</td>
+                        <td>
+                            <form>
+                                <!-- create a list relevansi -->
+                                <select id="myAns" onchange="verifyAnswer()" class="form-select">
+                                    <option value="choose"> --choose -- </option>
+                                    <option value="yes"> Yes </option>
+                                    <option value="no"> No </option>
+                                </select>
+                            </form>
+                        </td>
+                        <td>
+                            <form id="$lv->id">
+                                <label> <input type="radio" name="ekspektasi" id="e1" value="1"> 1 </label>
+                                <label> <input type="radio" name="ekspektasi" id="e2" value="2"> 2 </label>
+                                <label> <input type="radio" name="ekspektasi" id="e3" value="3"> 3 </label>
+                                <label> <input type="radio" name="ekspektasi" id="e4" value="4"> 4 </label>
+                                <label> <input type="radio" name="ekspektasi" id="e5" value="5"> 5 </label>
+
+                            </form>
+                        </td>
+                        <td>
+                            <form id="$lv->id">
+                                <label> <input type="radio" name="realita" id="r1" value="1"> 1 </label>
+                                <label> <input type="radio" name="realita" id="r2" value="2"> 2 </label>
+                                <label> <input type="radio" name="realita" id="r3" value="3"> 3 </label>
+                                <label> <input type="radio" name="realita" id="r4" value="4"> 4 </label>
+                                <label> <input type="radio" name="realita" id="r5" value="5"> 5 </label>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+
+    </section>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+@endsection
+
+                                       
