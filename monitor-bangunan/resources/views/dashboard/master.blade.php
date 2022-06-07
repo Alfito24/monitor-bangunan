@@ -99,7 +99,8 @@
                             class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="/dashboard/profil/{{$users->id}}" class="d-block">{{Auth::user()->nama}}</a>
+                        <a href="/dashboard/profil/{{ $users->id }}"
+                            class="d-block">{{ Auth::user()->nama }}</a>
                     </div>
                 </div>
 
@@ -125,20 +126,7 @@
                                     Tambah Proyek
                                 </p>
                             </a>
-                            {{-- <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="/dashboard/tambahproyek/{{ auth()->user()->id }}" class="nav-link">
-                    <i class="nav-icon fas fas fa-cart-plus"></i>
-                    <p>Tambah Proyek</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="/daftarproduk" class="nav-link">
-                    <i class="nav-icon fas fas fas fas fa-list"></i>
-                    <p>Daftar Proyek</p>
-                  </a>
-                </li>
-              </ul> --}}
+
                         </li>
                         <li class="nav-item has-treeview">
                             <a href="/dashboard/menu_utama/{{ auth()->user()->id }}" class="nav-link">
@@ -174,7 +162,8 @@
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="/dashboard/menu_utama/{{$proyek->id}}">Home</a></li>
+                                <li class="breadcrumb-item"><a
+                                        href="/dashboard/menu_utama/{{ $proyek->id }}">Home</a></li>
                                 <li class="breadcrumb-item active">Dashboard</li>
                             </ol>
                         </div><!-- /.col -->

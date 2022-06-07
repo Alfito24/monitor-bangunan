@@ -6,6 +6,7 @@ use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\StakeholdersController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\VariabelController;
 use Illuminate\Support\Facades\Route;
 
 /*
