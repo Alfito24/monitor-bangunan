@@ -28,7 +28,8 @@ class ProyekController extends Controller
         return redirect('dashboard/menu_utama/'.$proyek->id);
     }
     public function index($userId){
-        $proyeks = DB::table('proyek_user')->join('proyeks', 'proyek_user.proyek_id', '=', 'proyeks.id')->get();
+        $proyeks = DB::table('proyek_user')->join('proyeks', 'proyek_user.proyek_id', '=', 'proyeks.id')->where('user_id', $userId)->get();
+
         return view('pilihproyek', compact('proyeks'));
     }
 }

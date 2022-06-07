@@ -40,14 +40,14 @@ Route::post('/logout', [LoginController::class, 'logout']);
 Route::get('/register', [StakeholdersController::class, 'show']); //halaman register
 Route::post('/register', [StakeholdersController::class, 'store']); //nyimpan data register
 
-Route::get('/isisurvey', [SurveyController::class, 'fill']);
 Route::post('/tambahSurvey', [SurveyController::class, 'storeSurvey']); //simpan survey
 
 
 Route::post('/proyekform', [ProyekController::class, 'store']); //nyimpan data proyek
 
 Route::get('/pilihbangunan/{userId}', [ProyekController::class, 'index'])->name('pilihProyek'); //list proyek
-Route::get('/survey/proyek/{$id}', [SurveyController::class, 'index']);
+Route::get('proyek/{proyekId}/pilihSurvey', [SurveyController::class, 'index'])->name('pilihSurvey'); //list survey
+Route::get('proyek/survey/{surveyId}', [SurveyController::class, 'fill'])->name('isiSurvey');
 
 Route::get('/project', [ProyekController::class, 'show']); //halaman tambah proyek
 
