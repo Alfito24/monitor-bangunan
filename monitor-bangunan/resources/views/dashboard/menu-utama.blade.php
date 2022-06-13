@@ -42,16 +42,16 @@
     .box{
         width: 100%;
         max-height: 500px;
-        box-shadow: 8px 0px 17px -2px rgba(0,0,0,0.75);
--webkit-box-shadow: 8px 0px 17px -2px rgba(0,0,0,0.75);
--moz-box-shadow: 8px 0px 17px -2px rgba(0,0,0,0.75);
+        box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.24);
+-webkit-box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.24);
+-moz-box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.24);
     }
     .box2{
         width: 90%;
         max-height: 130px;
-        box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.33);
--webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.33);
--moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.33);
+        box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.24);
+-webkit-box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.24);
+-moz-box-shadow: 10px 10px 5px -3px rgba(0,0,0,0.24);
     }
     .kriteria{
         width:350px;
@@ -384,6 +384,7 @@
                                                                             </tbody>
                                                                           </table>
                                                                         </div>
+                                                                        <a href="" class="btn btn-dark text-light">Lihat rincian...</a>
                                                                     </div>
                                                                     <div class="col-3">
                                                                        <div class="row">
@@ -447,7 +448,7 @@
                                                                                     <h1 style="font-size: 60px" class="align-self-center">5</h1>
                                                                                 </div>
                                                                                 <div class="col-9 align-middle d-flex">
-                                                                                    <p class="align-self-center" style="font-size: 1.1rem">kriteria <span style="color:green;font-weight:bold" class="fw-bold">belum mencapai</span> ekspektasi responden</p>
+                                                                                    <p class="align-self-center" style="font-size: 1.1rem">kriteria <span style="color:green;font-weight:bold" class="fw-bold">melebihi</span> ekspektasi responden</p>
                                                                                  </div>
                                                                             </div>
                                                                         </div>
