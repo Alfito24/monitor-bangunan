@@ -14,19 +14,19 @@ class SurveyController extends Controller
 {
     public function fill($surveyId)
     {
-
         if (Auth::user() == 'pemilik') {
             return view('dashboard');
         } else if (!(Auth::check())) {
             abort('403');
         } else {
-            return view('isisurvey', ['surveyId' => $surveyId]);
+            $listVariabel = Variabel::all();
+
+            return view('isisurvey', ['surveyId' => $surveyId, 'listVariabel' => $listVariabel]);
         }
     }
 
     public function storeSurvey(Request $request)
     {
-        dd($request->all());
         $idProyek = $request->proyek_id;
         // store surveys
         $survey = new Survey();
@@ -58,5 +58,15 @@ class SurveyController extends Controller
         $user = DB::table('survey_user')->join('users', 'users.id', '=','survey_user.user_id')->where('user_id', Auth::id())->get();
 
         return view('survey.pilihsurvey', compact('survey', 'user'));
+    }
+
+    public function isiSurvey($surveyId){
+        $listVariabel = Variabel::all();
+
+        return view('survey.survey', compact('listVariabel', 'sruveyId'));
+    }
+
+    public function storehasilsurvey($surveyId, Request $request){
+        dd($request->all());
     }
 }

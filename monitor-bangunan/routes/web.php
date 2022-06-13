@@ -25,9 +25,6 @@ use Illuminate\Support\Facades\Route;
 // });
 Route::get('/', [PageController::class, 'landing']);
 
-Route::get('/survey', function () {
-    return view('survey');
-});
 Route::get('/dashboard/{id}', [DashboardController::class, 'index']);
 Route::get('/dashboard/profil/{proyekId}/{userId}', [DashboardController::class, 'profil']); //halaman detail user
 Route::get('/dashboard/menu_utama/{proyekId}', [DashboardController::class, 'menuUtama']); //halaman menu utama
@@ -47,7 +44,8 @@ Route::post('/proyekform', [ProyekController::class, 'store']); //nyimpan data p
 
 Route::get('/pilihbangunan/{userId}', [ProyekController::class, 'index'])->name('pilihProyek'); //list proyek
 Route::get('proyek/{proyekId}/pilihSurvey', [SurveyController::class, 'index'])->name('pilihSurvey'); //list survey
-Route::get('proyek/survey/{surveyId}', [SurveyController::class, 'fill'])->name('isiSurvey');
+Route::get('proyek/survey/{surveyId}', [SurveyController::class, 'fill'])->name('isiSurvey'); //halaman isi survey
+Route::post('proyek/survey/{surveyId}', [SurveyController::class, 'storehasilsurvey'])->name('simpanHasilSurvey'); //halaman isi survey
 
 Route::get('/project', [ProyekController::class, 'show']); //halaman tambah proyek
 
