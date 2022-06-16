@@ -98,3 +98,4 @@ Route::get('test', function (\Illuminate\Http\Request $request) {
 	}
 
 });
+Route::get('/testhasilsurvey/{surveyId}', [SurveyController::class, 'lihathasilsurvey']);
