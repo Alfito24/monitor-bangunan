@@ -23,4 +23,9 @@ class Survey extends Model
     {
         return $this->belongsToMany(Proyek::class);
     }
+
+	public function hasils()
+    {
+        return $this->hasMany(HasilSurvey::class);
+    }
 }
