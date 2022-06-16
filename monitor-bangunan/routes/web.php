@@ -52,3 +52,5 @@ Route::get('/project', [ProyekController::class, 'show']); //halaman tambah proy
 Route::post('/tambahStakeholder', [StakeholdersController::class, 'storeStakeholder']); //simpan stakeholder yang terlibat dalam proyek
 
 Route::get('/hapusStakeholder/{proyekId}/{userId}', [StakeholdersController::class, 'hapusStakeholder']); //Hapus stakeholder yang terlibat
+
+Route::get('/testhasilsurvey/{surveyId}', [SurveyController::class, 'lihathasilsurvey']);
