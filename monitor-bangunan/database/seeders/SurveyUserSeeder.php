@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class ProyekUserSeeder extends Seeder
+class SurveyUserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,14 +14,11 @@ class ProyekUserSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('proyek_user')->insert([
+        DB::table('survey_user')->insert([
             [
-                'proyek_id' => 1,
-                'user_id' => 1,
-            ],
-            [
-                'proyek_id' => 1,
+                'survey_id' => 1,
                 'user_id' => 3,
+                'status' => 1
             ],
         ]);
     }

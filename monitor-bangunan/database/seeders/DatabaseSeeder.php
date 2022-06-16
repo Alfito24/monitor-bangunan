@@ -17,7 +17,10 @@ class DatabaseSeeder extends Seeder
             VariabelSeeder::class,
             UserSeeder::class,
             ProyekSeeder::class,
-            ProyekUserSeeder::class
+            ProyekUserSeeder::class,
+            SurveySeeder::class,
+            ProyekSurveySeeder::class,
+            SurveyUserSeeder::class,
         ]);
     }
 }
