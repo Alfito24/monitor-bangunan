@@ -345,8 +345,12 @@
                                                             href="#gambar-3">Relasi Kriteria-Responden</a>
                                                     </li>
                                                     <li class="cycle-tab-item">
+<<<<<<< HEAD
                                                         <a class="nav-link" role="tab" data-toggle="tab"
                                                             href="#gambar-4">Rincian</a>
+=======
+                                                        <a class="nav-link" role="tab" data-toggle="tab" href="#rincian">Rincian</a>
+>>>>>>> 822b29e329776625fb6992416f8c084a6f0f4d2f
                                                     </li>
                                                 </ul>
                                             </div>
@@ -410,8 +414,12 @@
                                                                                 </tbody>
                                                                             </table>
                                                                         </div>
+<<<<<<< HEAD
                                                                         <a href="" class="btn btn-dark text-light">Lihat
                                                                             rincian...</a>
+=======
+                                                                        <a role="tab" data-toggle="tab" href="#rincian" class="btn btn-dark text-light">Lihat rincian...</a>
+>>>>>>> 822b29e329776625fb6992416f8c084a6f0f4d2f
                                                                     </div>
                                                                     <div class="col-3">
                                                                         <div class="row">
@@ -658,6 +666,65 @@
                                                                         <div id="pengalaman"></div>
 
                                                                     </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="tab-pane fade" id="rincian" role="tabpanel" aria-labelledby="profile-tab">
+                                                            <div class="container-fluid">
+                                                                <div class="row">
+                                                                    <div class="col-12">
+                                                                        <div class="box">
+                                                                           <div class="container">
+                                                                            <a class="btn btn-primary text-light fw-bold">Cetak</a>
+                                                                           </div>
+                                                                           <table class="table table-kriteria mt-3">
+                                                                            <thead>
+                                                                              <tr>
+                                                                                <th rowspan="2" scope="col" class="nomor">Rekomendasi Prioritas</th>
+                                                                                <th scope="col" class="simbol">Simbol</th>
+                                                                                <th scope="col" class="kriteria">Kriteria</th>
+                                                                                <th colspan="3" class="skor">Responden</th>
+                                                                                <th>Pengaruh Kriteria</th>
+                                                                                <th>Skor Kriteria</th>
+                                                                                <th>Kesesuaian Kriteria</th>
+                                                                              </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                              <tr>
+                                                                                <th scope="row"></th>
+                                                                                <th></th>
+                                                                                <th></th>
+                                                                                <th>Simbol</th>
+                                                                                <th>Ekspektasi</th>
+                                                                                <th>Realita</th>
+                                                                                <th></th>
+                                                                                <th></th>
+                                                                                <th></th>
+                                                                                <th></th>
+                                                                              </tr>
+                                                                              <tr>
+                                                                                <th scope="row">2</th>
+                                                                                <td>V2</td>
+                                                                                <td>Bangunan tidak merusak nilai budaya masyarakat/warga sekitar.</td>
+                                                                                <td>V2</td>
+                                                                                <td>4</td>
+                                                                                <td>4</td>
+                                                                                <td>20%</td>
+                                                                                <td>20%</td>
+                                                                                <td>Sesuai</td>
+                                                                              </tr>
+                                                                              <tr>
+                                                                                <th scope="row">3</th>
+                                                                                <td >V3</td>
+                                                                                <td>Tertatanya alur keluar masuk kendaraan pada bangunan.</td>
+                                                                                <td>5.00</td>
+                                                                              </tr>
+                                                                            </tbody>
+                                                                          </table>
+                                                                        </div>
+
+                                                                    </div>
+
                                                                 </div>
                                                             </div>
                                                         </div>
