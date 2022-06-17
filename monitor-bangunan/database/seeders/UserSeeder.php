@@ -45,6 +45,16 @@ class UserSeeder extends Seeder
                 'usia' => 20,
                 'pendidikan' => 'sma',
             ],
+            [
+                'email' => "Bahrul123@gmail.com",
+                'password' => bcrypt('Admin123'),
+                'nama' => 'Bahrul',
+                'kategori' => 'pengguna',
+                'peran' => 'penghuni',
+                'pengetahuan' => 3,
+                'usia' => 20,
+                'pendidikan' => 'sma',
+            ],
             ]);
         }
     }

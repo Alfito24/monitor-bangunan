@@ -23,6 +23,10 @@ class ProyekUserSeeder extends Seeder
                 'proyek_id' => 1,
                 'user_id' => 3,
             ],
+            [
+                'proyek_id' => 1,
+                'user_id' => 4,
+            ],
         ]);
     }
 }

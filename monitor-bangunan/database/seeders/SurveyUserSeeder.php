@@ -20,6 +20,11 @@ class SurveyUserSeeder extends Seeder
                 'user_id' => 3,
                 'status' => 1
             ],
+            [
+                'survey_id' => 1,
+                'user_id' => 4,
+                'status' => 1
+            ],
         ]);
     }
 }
