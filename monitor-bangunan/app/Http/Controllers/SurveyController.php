@@ -57,7 +57,7 @@ class SurveyController extends Controller
     public function index($proyekId)
     {
         $survey = DB::table('proyek_survey')->join('surveys', 'surveys.id', '=','proyek_survey.survey_id')->where('proyek_id', $proyekId)->get();
-        $user = DB::table('survey_user')->join('users', 'users.id', '=','survey_user.user_id')->where('user_id', Auth::id())->get();
+        $user = DB::table('survey_user')->join('users', 'users.id', '=','survey_user.user_id')->where('user_id', Auth::id())->where('status', 1)->get();
 
         return view('survey.pilihsurvey', compact('survey', 'user'));
     }
@@ -122,6 +122,10 @@ class SurveyController extends Controller
             'updated_at' => $today
         ]);
 
+        DB::table('survey_user')->where('survey_id', $surveyId)->where('user_id', Auth::id())->update(
+            ['status' => 2]
+        );
+
         return redirect('pilihbangunan/'.Auth::id());
     }
 
@@ -130,5 +134,11 @@ class SurveyController extends Controller
         $criteria = DB::table('variabels')->get();
         $responden = DB::table('hasil_survey')->join('users', 'users.id', '=', 'hasil_survey.user_id')->where('survey_id', $surveyId)->get();
 
+    }
+
+    public function hapussurvey($surveyId){
+        DB::table('surveys')->where('id', $surveyId)->delete();
+
+        return redirect()->back();
     }
 }
