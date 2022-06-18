@@ -38,6 +38,7 @@ Route::get('/register', [StakeholdersController::class, 'show']); //halaman regi
 Route::post('/register', [StakeholdersController::class, 'store']); //nyimpan data register
 
 Route::post('/tambahSurvey', [SurveyController::class, 'storeSurvey']); //simpan survey
+Route::get('/hasilsurvey', [DashboardController::class, 'hasil']);
 
 
 Route::post('/proyekform', [ProyekController::class, 'store']); //nyimpan data proyek

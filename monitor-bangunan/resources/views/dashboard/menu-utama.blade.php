@@ -208,6 +208,7 @@
                                                                         <th>Stakeholder</th>
                                                                         <th>Status</th>
                                                                         <th>Aksi</th>
+                                                                        <th>Hasil</th>
                                                                     </tr>
                                                                 </thead>
                                                                 @foreach ($survey as $sv)
@@ -251,6 +252,7 @@
                                                                                     <td>
                                                                                         <button class="btn btn-danger" onclick="location.href='/hapussurvey/{{$sv->survey_id}}'">Hapus</button>
                                                                                     </td>
+                                                                                    <td><a href="/hasilsurvey" class="btn btn-success">Lihat Hasil</a></td>
                                                                                 </tr>
                                                                             </tbody>
 
