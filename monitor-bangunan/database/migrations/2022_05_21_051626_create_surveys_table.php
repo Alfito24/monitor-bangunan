@@ -18,6 +18,7 @@ class CreateSurveysTable extends Migration
             $table->string('nama_survey');
             $table->date('tanggal_dibuat');
             $table->date('tanggal_kadaluwarsa');
+            $table->json('rsb_score')->nullable();
         });
     }
 

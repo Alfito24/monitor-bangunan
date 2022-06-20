@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\HasilSurvey;
 use App\Models\Proyek;
 use App\Models\Survey;
 use Illuminate\Http\Request;
@@ -126,7 +127,7 @@ class SurveyController extends Controller
             ['status' => 2]
         );
 
-        return redirect('pilihbangunan/'.Auth::id());
+        return redirect('/rsbcalc/'.$surveyId);
     }
 
     public function lihathasilsurvey($surveyId){
@@ -140,5 +141,49 @@ class SurveyController extends Controller
         DB::table('surveys')->where('id', $surveyId)->delete();
 
         return redirect()->back();
+    }
+
+    public function rsbcalc($surveyId){
+        $hasils = HasilSurvey::where('survey_id', $surveyId)->get();
+
+        $dataset = new \StdClass();
+        $dataset->criterias = json_decode(\App\Models\Variabel::all()->toJson());
+
+        foreach ($dataset->criterias as $i => $criteria) {
+            // ditambah C diawal agar tidak bentrok ketika kalkulasi
+            $dataset->criterias[$i]->id = 'c' . $criteria->id;
+        }
+
+        foreach ($hasils as $i => $row) {
+            $dataset->respondents[$i] = new \StdClass();
+
+            // ditambah R diawal agar tidak bentrok ketika kalkulasi
+            $dataset->respondents[$i]->id = 'r' . $row->user_id;
+
+            for ($j = 1; $j <= 21; $j++) {
+                if ($row["exp_var" . $j]) {
+                    $response = new \StdClass();
+
+                    // ditambah C diawal agar tidak bentrok ketika kalkulasi
+                    $response->criteriaId = 'c' . $j;
+                    $response->expectation = $row["exp_var" . $j];
+                    $response->reality = $row["real_var" . $j];
+
+                    $dataset->respondents[$i]->responses[] = $response;
+                }
+            }
+        }
+
+
+
+        return view('rsbCalc', ['dataset' => $dataset, 'surveyId' => $surveyId]);
+    }
+
+    public function storersbcalc($surveyId, Request $request){
+        //dd($request->result);
+        $result = json_decode($request->result, true);
+        DB::table('surveys')->where('id', $surveyId)->limit(1)->update(array('rsb_score' => $result));
+
+        return redirect('pilihbangungan/'.Auth::id());
     }
 }
