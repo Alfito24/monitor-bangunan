@@ -38,8 +38,7 @@ Route::get('/register', [StakeholdersController::class, 'show']); //halaman regi
 Route::post('/register', [StakeholdersController::class, 'store']); //nyimpan data register
 
 Route::post('/tambahSurvey', [SurveyController::class, 'storeSurvey']); //simpan survey
-Route::get('/hasilsurvey', [DashboardController::class, 'hasil']);
-
+Route::get('/hasilsurvey/{surveyId}', [DashboardController::class, 'hasilSurvey'])->name('hasilSurvey');
 
 Route::post('/proyekform', [ProyekController::class, 'store']); //nyimpan data proyek
 
@@ -56,48 +55,46 @@ Route::get('/hapusStakeholder/{proyekId}/{userId}', [StakeholdersController::cla
 
 Route::get('test', function (\Illuminate\Http\Request $request) {
 
-	if($request->result) {
-		//hasil kalkulasi dilempar balik ke route ini dengan parameter URL
-		//silahkan simpan ke DB agar tidak kalkulasi ulang
-		dd(json_decode($request->result));
+    if ($request->result) {
+        //hasil kalkulasi dilempar balik ke route ini dengan parameter URL
+        //silahkan simpan ke DB agar tidak kalkulasi ulang
+        dd(json_decode($request->result));
+    } else {
 
-	} else {
+        // formating
 
-		// formating
+        $hasils = \App\Models\HasilSurvey::where('survey_id', 1)->get();
 
-		$hasils = \App\Models\HasilSurvey::where('survey_id', 1)->get();
+        $dataset = new \StdClass();
+        $dataset->criterias = json_decode(\App\Models\Variabel::all()->toJson());
 
-		$dataset = new \StdClass();
-		$dataset->criterias = json_decode(\App\Models\Variabel::all()->toJson());
+        foreach ($dataset->criterias as $i => $criteria) {
+            // ditambah C diawal agar tidak bentrok ketika kalkulasi
+            $dataset->criterias[$i]->id = 'c' . $criteria->id;
+        }
 
-		foreach ($dataset->criterias as $i => $criteria) {
-			// ditambah C diawal agar tidak bentrok ketika kalkulasi
-			$dataset->criterias[$i]->id = 'c' . $criteria->id;
-		}
+        foreach ($hasils as $i => $row) {
+            $dataset->respondents[$i] = new \StdClass();
 
-		foreach ($hasils as $i => $row) {
-			$dataset->respondents[$i] = new \StdClass();
+            // ditambah R diawal agar tidak bentrok ketika kalkulasi
+            $dataset->respondents[$i]->id = 'r' . $row->user_id;
 
-			// ditambah R diawal agar tidak bentrok ketika kalkulasi
-			$dataset->respondents[$i]->id = 'r' . $row->user_id;
+            for ($j = 1; $j <= 21; $j++) {
+                if ($row["exp_var" . $j]) {
+                    $response = new \StdClass();
 
-			for ($j=1; $j <= 21 ; $j++) {
-				if ($row["exp_var" . $j]) {
-					$response = new \StdClass();
+                    // ditambah C diawal agar tidak bentrok ketika kalkulasi
+                    $response->criteriaId = 'c' . $j;
+                    $response->expectation = $row["exp_var" . $j];
+                    $response->reality = $row["real_var" . $j];
 
-					// ditambah C diawal agar tidak bentrok ketika kalkulasi
-					$response->criteriaId = 'c' . $j;
-					$response->expectation = $row["exp_var" . $j];
-					$response->reality = $row["real_var" . $j];
+                    $dataset->respondents[$i]->responses[] = $response;
+                }
+            }
+        }
 
-					$dataset->respondents[$i]->responses[] = $response;
-				}
-			}
-		}
-
-		return view('rsbCalc', ['dataset' => $dataset]);
-	}
-
+        return view('rsbCalc', ['dataset' => $dataset]);
+    }
 });
 Route::get('/testhasilsurvey/{surveyId}', [SurveyController::class, 'lihathasilsurvey']);
 
