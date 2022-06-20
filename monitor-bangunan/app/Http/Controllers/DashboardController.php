@@ -53,10 +53,10 @@ class DashboardController extends Controller
                 [
                     'listVariabel' => $listVariabel,
                     'users' => $users,
-                    'proyek' =>$proyek,
+                    'proyek' => $proyek,
                     'stakeholder' => $stakeholder,
                     'survey' => $survey,
-                    'responden' =>$responden
+                    'responden' => $responden
                 ]
             );
         } else {
@@ -81,5 +81,11 @@ class DashboardController extends Controller
         } else {
             abort(403);
         }
+    }
+    public function hasilSurvey($surveyId)
+    {
+        $hasil = DB::table('survey_user')->join('surveys', 'survey_user.survey_id', '=', 'surveys.id')->where('survey_id', $surveyId)->get();
+
+        return view('dashboard.hasilsurvey', compact('hasil'));
     }
 }
