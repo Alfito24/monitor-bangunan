@@ -82,9 +82,9 @@
                             <li class="cycle-tab-item">
                                 <a class="nav-link" role="tab" data-toggle="tab" href="#variabel">Survey</a>
                             </li>
-                            <li class="cycle-tab-item">
+                            {{-- <li class="cycle-tab-item">
                                 <a class="nav-link" role="tab" data-toggle="tab" href="#survey">Hasil Survey</a>
-                            </li>
+                            </li> --}}
                         </ul>
                     </div>
                     <div class="card-body">
