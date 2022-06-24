@@ -75,8 +75,11 @@
     series.hiddenState.properties.startAngle = -90;
 
 
+    let id = "{{ $id }}";
+    console.log('id');
+
     chart.legend = new am4charts.Legend();
-    chart.dataSource.url = "http://127.0.0.1:8000/api/getdata/19";
+    chart.dataSource.url = "http://127.0.0.1:8000/api/getdata/" + id;
 </script>
 
 </html>
