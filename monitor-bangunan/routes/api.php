@@ -18,4 +18,7 @@ use App\Http\Controllers\DashboardController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('/getdata/{surveyId}', [DashboardController::class, 'getData'])->name('getdata');
+Route::get('/getkategori/{surveyId}', [DashboardController::class, 'getKategori'])->name('getkategori');
+Route::get('/getpendidikan/{surveyId}', [DashboardController::class, 'getPendidikan'])->name('getpendidikan');
+Route::get('/getusia/{surveyId}', [DashboardController::class, 'getUsia'])->name('getusia');
+Route::get('/getpengetahuan/{surveyId}', [DashboardController::class, 'getPengetahuan'])->name('getpengetahuan');

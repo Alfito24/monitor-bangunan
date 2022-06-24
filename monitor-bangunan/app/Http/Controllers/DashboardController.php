@@ -84,9 +84,6 @@ class DashboardController extends Controller
     }
     public function hasilSurvey($surveyId)
     {
-        // $idsurvey = DB::select("SELECT id FROM surveys where id=$surveyId");
-
-
         if (request()->ajax()) {
             return DB::table('survey_user')->join('surveys', 'survey_user.survey_id', '=', 'surveys.id')->where('survey_id', $surveyId)->get();
         }
@@ -95,7 +92,7 @@ class DashboardController extends Controller
         return view('dashboard.hsl-survey', ['id' => $id]);
     }
 
-    public function getData($surveyId)
+    public function getKategori($surveyId)
     {
 
         $data = DB::table('survey_user')
@@ -104,6 +101,45 @@ class DashboardController extends Controller
             ->select('kategori', DB::raw('count(*) as total'))
             ->where('survey_id', $surveyId)
             ->groupBy('kategori')
+            ->get();
+
+        return \Response::json($data);
+    }
+    public function getPendidikan($surveyId)
+    {
+
+        $data = DB::table('survey_user')
+            ->join('surveys', 'surveys.id', '=', 'survey_user.survey_id')
+            ->join('users', 'users.id', '=', 'survey_user.user_id')
+            ->select('pendidikan', DB::raw('count(*) as total'))
+            ->where('survey_id', $surveyId)
+            ->groupBy('pendidikan')
+            ->get();
+
+        return \Response::json($data);
+    }
+    public function getUsia($surveyId)
+    {
+
+        $data = DB::table('survey_user')
+            ->join('surveys', 'surveys.id', '=', 'survey_user.survey_id')
+            ->join('users', 'users.id', '=', 'survey_user.user_id')
+            ->select('usia', DB::raw('count(*) as total'))
+            ->where('survey_id', $surveyId)
+            ->groupBy('usia')
+            ->get();
+
+        return \Response::json($data);
+    }
+    public function getPengetahuan($surveyId)
+    {
+
+        $data = DB::table('survey_user')
+            ->join('surveys', 'surveys.id', '=', 'survey_user.survey_id')
+            ->join('users', 'users.id', '=', 'survey_user.user_id')
+            ->select('pengetahuan', DB::raw('count(*) as total'))
+            ->where('survey_id', $surveyId)
+            ->groupBy('pengetahuan')
             ->get();
 
         return \Response::json($data);
