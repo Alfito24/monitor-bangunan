@@ -69,7 +69,7 @@
                     <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Demografi Responden</button>
                     <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Skor Kriteria</button>
                     <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Relasi Kriteria-Responden</button>
-                    <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Rincian</button>
+                    <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#rincian" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Rincian</button>
                 </div>
             </nav>
             <div class="tab-content mt-3" id="nav-tabContent">
@@ -256,8 +256,97 @@
                                             <div id="chartpengetahuan"></div>
                                         </div>
                                     </div>
-                                </div></div>
-                                <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
+                                </div>
+                            </div>
+                                <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...
+
+                                </div>
+                                <div class="tab-pane fade" id="rincian" role="tabpanel" aria-labelledby="profile-tab">
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="box">
+                                                    <div class="container">
+                                                        <a class="btn btn-primary text-light fw-bold">Cetak</a>
+                                                    </div>
+                                                    <table class="table table-kriteria mt-3">
+                                                        <thead>
+                                                            <tr>
+                                                                <th rowspan="2" scope="col" class="nomor">Rekomendasi
+                                                                    Prioritas</th>
+                                                                <th scope="col" class="simbol">Simbol</th>
+                                                                <th scope="col" class="kriteria">Kriteria</th>
+                                                                <th colspan="3" class="skor">Responden</th>
+                                                                <th>Pengaruh Kriteria</th>
+                                                                <th>Skor Kriteria</th>
+                                                                <th>Kesesuaian Kriteria</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <th scope="row"></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th>Simbol</th>
+                                                                <th>Ekspektasi</th>
+                                                                <th>Realita</th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                            </tr>
+                                                            @foreach ($criterias as $criteria )
+                                                           @if ($criteria->weight != 0)
+                                                           <tr>
+                                                            <th scope="row">{{ $loop->iteration }}</th>
+                                                            <td>{{ $criteria->id }}</td>
+                                                            <td>{{ $criteria->isiVariabel }}</td>
+
+                                                            @foreach ($respondents2 as $r )
+                                                           @foreach ($r->responses as $res )
+                                                          @if ($res->criteriaId == $criteria->id)
+                                                          <td>{{ $r->id }}</td>
+                                                          @endif
+                                                           @endforeach
+                                                            @endforeach
+
+                                                            @foreach ($respondents2 as $r )
+                                                           @foreach ($r->responses as $res )
+                                                          @if ($res->criteriaId == $criteria->id)
+                                                          <td>{{ $res->expectation }}</td>
+                                                          @endif
+                                                           @endforeach
+                                                            @endforeach
+
+                                                            @foreach ($respondents2 as $r )
+                                                           @foreach ($r->responses as $res )
+                                                          @if ($res->criteriaId == $criteria->id)
+                                                          <td>{{ $res->reality }}</td>
+                                                          @endif
+                                                           @endforeach
+                                                            @endforeach
+                                                            <td>{{ $criteria->weight * 100 }}%</td>
+                                                            <td>{{ $criteria->score->realityTotal * 10 }}%</td>
+                                                            <td>
+                                                                @if ($criteria->score->realityTotal >= $criteria->score->expectationTotal)
+                                                                Sesuai
+                                                                @else
+                                                                Tidak Sesuai
+                                                                @endif
+                                                            </td>
+                                                        </tr>
+                                                           @endif
+                                                            @endforeach
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 

@@ -22,3 +22,4 @@ Route::get('/getkategori/{surveyId}', [DashboardController::class, 'getKategori'
 Route::get('/getpendidikan/{surveyId}', [DashboardController::class, 'getPendidikan'])->name('getpendidikan');
 Route::get('/getusia/{surveyId}', [DashboardController::class, 'getUsia'])->name('getusia');
 Route::get('/getpengetahuan/{surveyId}', [DashboardController::class, 'getPengetahuan'])->name('getpengetahuan');
+Route::get('/getskorkeseluruhan', [DashboardController::class, 'getSkorKeseluruhan'])->name('getskorkeseluruhan');
