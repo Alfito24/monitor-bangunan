@@ -92,8 +92,11 @@ class DashboardController extends Controller
 
         $rsb_json = DB::table('surveys')->select('rsb_score')->where('id', $surveyId)->first();
         $rsb_php = json_decode($rsb_json->rsb_score);
+        $criterias = $rsb_php->criterias;
+        $responden = count($rsb_php->respondents);
+        $skorkeseluruhan = $rsb_php->score;
 
-        return view('dashboard.hsl-survey', ['id' => $id]);
+        return view('dashboard.hsl-survey', ['id' => $id, 'criterias' => $criterias, 'respondents' => $responden, 'score' => $skorkeseluruhan]);
     }
 
     public function getKategori($surveyId)

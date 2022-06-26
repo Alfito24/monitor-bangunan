@@ -237,7 +237,8 @@
                                                                     </td>
                                                                     <td>
                                                                         @foreach ($responden as $res)
-                                                                            <ul>
+                                                                         <ul>
+                                                                            @if ($res->survey_id == $sv->survey_id)
                                                                                 <li>
                                                                                     @if ($res->status == 1)
                                                                                         <h6><span
@@ -253,6 +254,7 @@
                                                                                         </span>
                                                                                     @endif
                                                                                 </li>
+                                                                                @endif
                                                                             </ul>
                                                                         @endforeach
                                                                     </td>
