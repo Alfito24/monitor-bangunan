@@ -184,6 +184,6 @@ class SurveyController extends Controller
         $result = json_decode($request->result, true);
         DB::table('surveys')->where('id', $surveyId)->limit(1)->update(array('rsb_score' => $result));
 
-        return redirect('pilihbangungan/'.Auth::id());
+        return redirect('pilihbangunan/'.Auth::id());
     }
 }

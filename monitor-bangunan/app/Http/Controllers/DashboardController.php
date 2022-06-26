@@ -89,6 +89,10 @@ class DashboardController extends Controller
         }
 
         $id = $surveyId;
+
+        $rsb_json = DB::table('surveys')->select('rsb_score')->where('id', $surveyId)->first();
+        $rsb_php = json_decode($rsb_json->rsb_score);
+
         return view('dashboard.hsl-survey', ['id' => $id]);
     }
 
