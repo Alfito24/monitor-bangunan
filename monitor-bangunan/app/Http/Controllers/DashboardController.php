@@ -97,7 +97,9 @@ class DashboardController extends Controller
         $respondents = $rsb_php->respondents;
         $skorkeseluruhan = $rsb_php->score;
 
-        return view('dashboard.hsl-survey', ['id' => $id, 'criterias' => $criterias, 'respondents' => $responden, 'score' => $skorkeseluruhan, 'respondents2' => $respondents, 'rsb_score' => $rsb_json->rsb_score]);
+        $survey = DB::table('surveys')->select('tanggal_dibuat', 'rsb_score')->get();
+
+        return view('dashboard.hsl-survey', ['id' => $id, 'criterias' => $criterias, 'respondents' => $responden, 'score' => $skorkeseluruhan, 'respondents2' => $respondents, 'rsb_score' => $rsb_json->rsb_score, 'surveys' => $survey]);
     }
 
     public function getKategori($surveyId)
@@ -166,7 +168,7 @@ class DashboardController extends Controller
             $data[$index]->date = $rsb->tanggal_dibuat;
             $index++;
         }
-        
+
         return \Response::json($data);
     }
 }
