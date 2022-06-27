@@ -407,13 +407,13 @@
     chartall.dataSource.url = "http://127.0.0.1:8000/api/getskorkeseluruhan/";
 
     var categoryAxis = chartall.xAxes.push(new am4charts.CategoryAxis());
-    categoryAxis.dataFields.category = "tanggal_dibuat";
+    categoryAxis.dataFields.category = "date";
     var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
 
     //create series
     var seriesall = chartall.series.push(new am4charts.LineSeries());
-    seriesall.dataFields.valueY = "rsb_socre";
-    seriesall.dataFields.categoryX = "tanggal_dibuat";
+    seriesall.dataFields.valueY = "score";
+    seriesall.dataFields.categoryX = "date";
     seriesall.name = "Skors";
     seriesall.strokeWidth = 3;
     seriesall.tensionX = 0.7;
