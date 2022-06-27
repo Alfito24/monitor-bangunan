@@ -683,8 +683,10 @@
                                         dateFormat: "yyyy",
                                         dateFields: ["valueX"]
                                     });
-
-                                    var data = [
+                                        
+                                    //root.dataSource.url = "http://127.0.0.1:8000/api/getskorkeseluruhan/";
+                                    
+                                     var data = [
                                     {
                                         date: "2012-01-01",
                                         value: 8
@@ -766,7 +768,6 @@
                                         value: 15
                                     },
                                     ];
-
                                     // Create chart
                                     // https://www.amcharts.com/docs/v5/charts/xy-chart/
                                     var chart = root.container.children.push(

@@ -152,4 +152,21 @@ class DashboardController extends Controller
 
         return \Response::json($data);
     }
+
+    public function getSkorKeseluruhan()
+    {
+        $rsb_score_all = DB::table('surveys')->select('tanggal_dibuat', 'rsb_score')->get();
+
+        $data = array();
+        $index = 0;
+        foreach($rsb_score_all as $rsb){
+            $rsb_php = json_decode($rsb->rsb_score);
+            $data[$index] = new \stdClass();
+            $data[$index]->score = $rsb_php->score->expectationTotal;
+            $data[$index]->date = $rsb->tanggal_dibuat;
+            $index++;
+        }
+        
+        return \Response::json($data);
+    }
 }
