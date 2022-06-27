@@ -67,8 +67,8 @@
                 <div class="nav nav-tabs mt-3" id="nav-tab" role="tablist">
                     <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Ringkasan</button>
                     <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Demografi Responden</button>
-                    <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Skor Kriteria</button>
-                    <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Relasi Kriteria-Responden</button>
+                    <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#criteria-graph" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Skor Kriteria</button>
+                    <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#network-graph" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Relasi Kriteria-Responden</button>
                     <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#rincian" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Rincian</button>
                 </div>
             </nav>
@@ -258,7 +258,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...
+                            <div class="tab-pane fade" id="criteria-graph" role="tabpanel" aria-labelledby="nav-contact-tab">...
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div id="criteriaGraphChart" style="border: 1px; width: 100%; height: 75vh; font-family: monospace"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="network-graph" role="tabpanel" aria-labelledby="nav-contact-tab">...
                                 <div class="container-fluid">
                                     <div class="row">
                                         <div id="networkGraphChart" style="border: 1px; width: 100%; height: 75vh; font-family: monospace"></div>
@@ -370,6 +377,90 @@
                     <script src="//cdn.amcharts.com/lib/4/plugins/forceDirected.js"></script>
                 </body>
 
+                <script> //script untuk criteria graph
+                    const criteriaGraphDataFormat = RSBScoreJSON => {
+
+                        const data = RSBScoreJSON.criterias.map(cr => {
+                            let lineIndex = 0;
+                            let desc = ''
+
+                            for (var i = 0; i < cr.isiVariabel.length; i++) {
+
+                                if (lineIndex > 20 && cr.isiVariabel.charAt(i) === ' ') {
+                                    desc += '\n'
+                                    lineIndex = 0
+                                } else {
+                                    desc += cr.isiVariabel.charAt(i)
+                                }
+
+                                lineIndex++
+                            }
+
+                            const score = (cr.score && cr.score.expectationTotal ? 5 - cr.score.gap : 0)
+
+                            return {
+                                symbol: cr.id,
+                                desc: desc,
+                                score: score,
+                                bulletTooltip: score.toFixed(2),
+                                // ...cr.score
+                            }
+                        })
+
+                        return data
+                    }
+
+                    const chartx = (chartId) => {
+                        const chart = am4core.create(chartId, am4charts.XYChart)
+
+                        // Create axes
+                        const categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+                        categoryAxis.dataFields.category = "symbol";
+                        categoryAxis.tooltipText = "{desc}"
+                        categoryAxis.renderer.minGridDistance = 30;
+
+
+                        const valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+                        valueAxis.max = 9
+                        valueAxis.min = 0
+
+                        var range2 = valueAxis.axisRanges.create();
+                        range2.value = 5;
+                        range2.grid.stroke = am4core.color("green");
+                        range2.grid.strokeWidth = 2;
+                        range2.grid.strokeOpacity = 0.2;
+                        range2.label.inside = true;
+                        range2.label.text = "Ekspektasi";
+                        range2.label.fill = range2.grid.stroke;
+                        range2.label.align = "center";
+
+
+                        const GapSeries = chart.series.push(new am4charts.LineSeries());
+                        GapSeries.dataFields.categoryX = "symbol";
+                        GapSeries.dataFields.valueY = "score";
+                        GapSeries.name = "Realita"
+                        GapSeries.strokeWidth = 2;
+
+                        const interfaceColors = new am4core.InterfaceColorSet();
+                        const bullet = GapSeries.bullets.push(new am4charts.CircleBullet());
+                        bullet.circle.stroke = interfaceColors.getFor("background");
+                        bullet.fill = GapSeries.stroke
+                        bullet.tooltipText = '{bulletTooltip}'
+
+                        bullet.adapter.add("fill", function (fill, target) {
+                            return target.dataItem.valueY === 0 ?  am4core.color('gray') : target.dataItem.valueY >= 5  ? am4core.color('green') : am4core.color('red');
+                        })
+
+                        chart.legend = new am4charts.Legend();
+                        chart.cursor = new am4charts.XYCursor();
+
+                        return chart
+                    };
+                    const criteriachart = chartx("criteriaGraphChart");
+                    criteriachart.data = criteriaGraphDataFormat(<?= $rsb_score ?>);
+                </script>
+
+
                 <script> //script untuk network graph
                     const networkGraphDataFormat = RSBScoreJSON => {
 
@@ -449,365 +540,365 @@
 
                             // for (var i = 0; i < respondent.role.length; i++) {
 
-                            // 	if (lineIndex > 20 && respondent.role.charAt(i) === ' ') {
-                            // 		role += '\n'
-                            // 		lineIndex = 0
-                            // 	} else {
-                            // 		role += respondent.role.charAt(i)
-                            // 	}
+                                // 	if (lineIndex > 20 && respondent.role.charAt(i) === ' ') {
+                                    // 		role += '\n'
+                                    // 		lineIndex = 0
+                                    // 	} else {
+                                        // 		role += respondent.role.charAt(i)
+                                        // 	}
 
-                            // 	lineIndex++
-                            // }
+                                        // 	lineIndex++
+                                        // }
 
-                            return respondent.responses.map(res => {
+                                        return respondent.responses.map(res => {
 
-                                const text = 'Ekspektasi: [bold]' + res.expectation + '[/]\nRealita: [bold]' + res.reality + '[/]';
+                                            const text = 'Ekspektasi: [bold]' + res.expectation + '[/]\nRealita: [bold]' + res.reality + '[/]';
 
-                                const temp = data.find(d => d.id === res.criteriaId);
+                                            const temp = data.find(d => d.id === res.criteriaId);
 
-                                return temp ? data.find(d => d.id === res.criteriaId).childrens.push({
-                                    text: respondent.id + '\n\n' + text,
-                                    name: respondent.id,
-                                    color: res.expectation === res.reality ? '#9e9e9e' : res.expectation > res.reality ? '#ff1744' : '#26a69a'
-                                }) : 0
-                            })
-                        })
+                                            return temp ? data.find(d => d.id === res.criteriaId).childrens.push({
+                                                text: respondent.id + '\n\n' + text,
+                                                name: respondent.id,
+                                                color: res.expectation === res.reality ? '#9e9e9e' : res.expectation > res.reality ? '#ff1744' : '#26a69a'
+                                            }) : 0
+                                        })
+                                    })
 
-                        return data
-                    }
+                                    return data
+                                }
 
-                    const chartxx = (chartId) => {
-                        const chart = am4core.create(chartId, am4plugins_forceDirected.ForceDirectedTree);
-                        // chart.strokeWidth=1
-                        // chart.background.fiil='#AAA'
-                        // chart.background.opacity = 0.5
-                        chart.zoomable = true
-                        // chart.legend = new am4charts.Legend();
+                                const chartxx = (chartId) => {
+                                    const chart = am4core.create(chartId, am4plugins_forceDirected.ForceDirectedTree);
+                                    // chart.strokeWidth=1
+                                    // chart.background.fiil='#AAA'
+                                    // chart.background.opacity = 0.5
+                                    chart.zoomable = true
+                                    // chart.legend = new am4charts.Legend();
 
-                        const series = chart.series.push(new am4plugins_forceDirected.ForceDirectedSeries());
+                                    const series = chart.series.push(new am4plugins_forceDirected.ForceDirectedSeries());
 
-                        // series.data = data
+                                    // series.data = data
 
-                        // Set up data fields
-                        series.dataFields.value = "impact";
-                        series.dataFields.name = "name";
-                        // series.dataFields.hiddenInLegend = false
-                        series.dataFields.id = "name";
-                        series.dataFields.children = "childrens";
-                        series.minRadius = 15;
-                        series.maxRadius = 50;
-                        series.dataFields.color = "color"
-                        series.centerStrength = 1;
-                        series.maxLevels = 1;
-
-
+                                    // Set up data fields
+                                    series.dataFields.value = "impact";
+                                    series.dataFields.name = "name";
+                                    // series.dataFields.hiddenInLegend = false
+                                    series.dataFields.id = "name";
+                                    series.dataFields.children = "childrens";
+                                    series.minRadius = 15;
+                                    series.maxRadius = 50;
+                                    series.dataFields.color = "color"
+                                    series.centerStrength = 1;
+                                    series.maxLevels = 1;
 
 
-                        // Add labels
-                        let nodeTemplate = series.nodes.template;
-                        nodeTemplate.label.text = "{name}";
-                        nodeTemplate.tooltipText = "{text}";
 
-                        return chart
-                    }
 
-                    const chart = chartxx("networkGraphChart");
-                    chart.data = networkGraphDataFormat(<?= $rsb_score ?>)
-                </script>
-                <script>
-                    let id = "{{ $id }}";
-                    console.log('id');
+                                    // Add labels
+                                    let nodeTemplate = series.nodes.template;
+                                    nodeTemplate.label.text = "{name}";
+                                    nodeTemplate.tooltipText = "{text}";
 
-                    am4core.useTheme(am4themes_animated);
-                    //Chart kategori
-                    var kategori = am4core.create("chartkategori", am4charts.PieChart);
-                    var series_kategori = kategori.series.push(new am4charts.PieSeries());
-                    series_kategori.dataFields.value = "total";
-                    series_kategori.dataFields.category = "kategori";
+                                    return chart
+                                }
 
-                    // this creates initial animation
-                    series_kategori.hiddenState.properties.opacity = 1;
-                    series_kategori.hiddenState.properties.endAngle = -90;
-                    series_kategori.hiddenState.properties.startAngle = -90;
+                                const chart = chartxx("networkGraphChart");
+                                chart.data = networkGraphDataFormat(<?= $rsb_score ?>)
+                            </script>
+                            <script>
+                                let id = "{{ $id }}";
+                                console.log('id');
 
-                    kategori.legend = new am4charts.Legend();
-                    kategori.dataSource.url = "http://127.0.0.1:8000/api/getkategori/" + id;
+                                am4core.useTheme(am4themes_animated);
+                                //Chart kategori
+                                var kategori = am4core.create("chartkategori", am4charts.PieChart);
+                                var series_kategori = kategori.series.push(new am4charts.PieSeries());
+                                series_kategori.dataFields.value = "total";
+                                series_kategori.dataFields.category = "kategori";
 
-                    //Chart pendidikan
-                    var pend = am4core.create("chartpendidikan", am4charts.PieChart);
-                    var series_pend = pend.series.push(new am4charts.PieSeries());
-                    series_pend.dataFields.value = "total";
-                    series_pend.dataFields.category = "pendidikan";
+                                // this creates initial animation
+                                series_kategori.hiddenState.properties.opacity = 1;
+                                series_kategori.hiddenState.properties.endAngle = -90;
+                                series_kategori.hiddenState.properties.startAngle = -90;
 
-                    // this creates initial animation
-                    series_pend.hiddenState.properties.opacity = 1;
-                    series_pend.hiddenState.properties.endAngle = -90;
-                    series_pend.hiddenState.properties.startAngle = -90;
+                                kategori.legend = new am4charts.Legend();
+                                kategori.dataSource.url = "http://127.0.0.1:8000/api/getkategori/" + id;
 
-                    pend.legend = new am4charts.Legend();
-                    pend.dataSource.url = "http://127.0.0.1:8000/api/getpendidikan/" + id;
+                                //Chart pendidikan
+                                var pend = am4core.create("chartpendidikan", am4charts.PieChart);
+                                var series_pend = pend.series.push(new am4charts.PieSeries());
+                                series_pend.dataFields.value = "total";
+                                series_pend.dataFields.category = "pendidikan";
 
-                    //Chart usia
-                    var usia = am4core.create("chartusia", am4charts.PieChart);
-                    var series_usia = usia.series.push(new am4charts.PieSeries());
-                    series_usia.dataFields.value = "total";
-                    series_usia.dataFields.category = "usia";
+                                // this creates initial animation
+                                series_pend.hiddenState.properties.opacity = 1;
+                                series_pend.hiddenState.properties.endAngle = -90;
+                                series_pend.hiddenState.properties.startAngle = -90;
 
-                    // this creates initial animation
-                    series_usia.hiddenState.properties.opacity = 1;
-                    series_usia.hiddenState.properties.endAngle = -90;
-                    series_usia.hiddenState.properties.startAngle = -90;
+                                pend.legend = new am4charts.Legend();
+                                pend.dataSource.url = "http://127.0.0.1:8000/api/getpendidikan/" + id;
 
-                    usia.legend = new am4charts.Legend();
-                    usia.dataSource.url = "http://127.0.0.1:8000/api/getusia/" + id;
+                                //Chart usia
+                                var usia = am4core.create("chartusia", am4charts.PieChart);
+                                var series_usia = usia.series.push(new am4charts.PieSeries());
+                                series_usia.dataFields.value = "total";
+                                series_usia.dataFields.category = "usia";
 
-                    //Chart pengetahuan
-                    var pengetahuan = am4core.create("chartpengetahuan", am4charts.PieChart);
-                    var series_pengetahuan = pengetahuan.series.push(new am4charts.PieSeries());
-                    series_pengetahuan.dataFields.value = "total";
-                    series_pengetahuan.dataFields.category = "pengetahuan";
+                                // this creates initial animation
+                                series_usia.hiddenState.properties.opacity = 1;
+                                series_usia.hiddenState.properties.endAngle = -90;
+                                series_usia.hiddenState.properties.startAngle = -90;
 
-                    // this creates initial animation
-                    series_pengetahuan.hiddenState.properties.opacity = 1;
-                    series_pengetahuan.hiddenState.properties.endAngle = -90;
-                    series_pengetahuan.hiddenState.properties.startAngle = -90;
+                                usia.legend = new am4charts.Legend();
+                                usia.dataSource.url = "http://127.0.0.1:8000/api/getusia/" + id;
 
-                    pengetahuan.legend = new am4charts.Legend();
-                    pengetahuan.dataSource.url = "http://127.0.0.1:8000/api/getpengetahuan/" + id;
-                </script>
-                <script>
-                    am5.ready(function() {
+                                //Chart pengetahuan
+                                var pengetahuan = am4core.create("chartpengetahuan", am4charts.PieChart);
+                                var series_pengetahuan = pengetahuan.series.push(new am4charts.PieSeries());
+                                series_pengetahuan.dataFields.value = "total";
+                                series_pengetahuan.dataFields.category = "pengetahuan";
 
-                        // Create root element
-                        // https://www.amcharts.com/docs/v5/getting-started/#Root_element
-                        var root = am5.Root.new("chartdiv");
+                                // this creates initial animation
+                                series_pengetahuan.hiddenState.properties.opacity = 1;
+                                series_pengetahuan.hiddenState.properties.endAngle = -90;
+                                series_pengetahuan.hiddenState.properties.startAngle = -90;
 
-                        // Set themes
-                        // https://www.amcharts.com/docs/v5/concepts/themes/
-                        root.setThemes([
-                        am5themes_Animated.new(root)
-                        ]);
+                                pengetahuan.legend = new am4charts.Legend();
+                                pengetahuan.dataSource.url = "http://127.0.0.1:8000/api/getpengetahuan/" + id;
+                            </script>
+                            <script>
+                                am5.ready(function() {
 
-                        root.dateFormatter.setAll({
-                            dateFormat: "yyyy",
-                            dateFields: ["valueX"]
-                        });
+                                    // Create root element
+                                    // https://www.amcharts.com/docs/v5/getting-started/#Root_element
+                                    var root = am5.Root.new("chartdiv");
 
-                        var data = [
-                        {
-                            date: "2012-01-01",
-                            value: 8
-                        },
-                        {
-                            date: "2012-01-02",
-                            value: 10
-                        },
-                        {
-                            date: "2012-01-03",
-                            value: 12
-                        },
-                        {
-                            date: "2012-01-04",
-                            value: 14
-                        },
-                        {
-                            date: "2012-01-05",
-                            value: 11
-                        },
-                        {
-                            date: "2012-01-06",
-                            value: 6
-                        },
-                        {
-                            date: "2012-01-07",
-                            value: 7
-                        },
-                        {
-                            date: "2012-01-08",
-                            value: 9
-                        },
-                        {
-                            date: "2012-01-09",
-                            value: 13
-                        },
-                        {
-                            date: "2012-01-10",
-                            value: 15
-                        },
-                        {
-                            date: "2012-01-11",
-                            value: 19
-                        },
-                        {
-                            date: "2012-01-12",
-                            value: 21
-                        },
-                        {
-                            date: "2012-01-13",
-                            value: 22
-                        },
-                        {
-                            date: "2012-01-14",
-                            value: 20
-                        },
-                        {
-                            date: "2012-01-15",
-                            value: 18
-                        },
-                        {
-                            date: "2012-01-16",
-                            value: 14
-                        },
-                        {
-                            date: "2012-01-17",
-                            value: 16
-                        },
-                        {
-                            date: "2012-01-18",
-                            value: 18
-                        },
-                        {
-                            date: "2012-01-19",
-                            value: 17
-                        },
-                        {
-                            date: "2012-01-20",
-                            value: 15
-                        },
-                        ];
+                                    // Set themes
+                                    // https://www.amcharts.com/docs/v5/concepts/themes/
+                                    root.setThemes([
+                                    am5themes_Animated.new(root)
+                                    ]);
 
-                        // Create chart
-                        // https://www.amcharts.com/docs/v5/charts/xy-chart/
-                        var chart = root.container.children.push(
-                        am5xy.XYChart.new(root, {
-                            focusable: true,
-                            panX: true,
-                            panY: true,
-                            wheelX: "panX",
-                            wheelY: "zoomX",
-                            pinchZoomX:true
-                        })
-                        );
+                                    root.dateFormatter.setAll({
+                                        dateFormat: "yyyy",
+                                        dateFields: ["valueX"]
+                                    });
 
-                        var easing = am5.ease.linear;
+                                    var data = [
+                                    {
+                                        date: "2012-01-01",
+                                        value: 8
+                                    },
+                                    {
+                                        date: "2012-01-02",
+                                        value: 10
+                                    },
+                                    {
+                                        date: "2012-01-03",
+                                        value: 12
+                                    },
+                                    {
+                                        date: "2012-01-04",
+                                        value: 14
+                                    },
+                                    {
+                                        date: "2012-01-05",
+                                        value: 11
+                                    },
+                                    {
+                                        date: "2012-01-06",
+                                        value: 6
+                                    },
+                                    {
+                                        date: "2012-01-07",
+                                        value: 7
+                                    },
+                                    {
+                                        date: "2012-01-08",
+                                        value: 9
+                                    },
+                                    {
+                                        date: "2012-01-09",
+                                        value: 13
+                                    },
+                                    {
+                                        date: "2012-01-10",
+                                        value: 15
+                                    },
+                                    {
+                                        date: "2012-01-11",
+                                        value: 19
+                                    },
+                                    {
+                                        date: "2012-01-12",
+                                        value: 21
+                                    },
+                                    {
+                                        date: "2012-01-13",
+                                        value: 22
+                                    },
+                                    {
+                                        date: "2012-01-14",
+                                        value: 20
+                                    },
+                                    {
+                                        date: "2012-01-15",
+                                        value: 18
+                                    },
+                                    {
+                                        date: "2012-01-16",
+                                        value: 14
+                                    },
+                                    {
+                                        date: "2012-01-17",
+                                        value: 16
+                                    },
+                                    {
+                                        date: "2012-01-18",
+                                        value: 18
+                                    },
+                                    {
+                                        date: "2012-01-19",
+                                        value: 17
+                                    },
+                                    {
+                                        date: "2012-01-20",
+                                        value: 15
+                                    },
+                                    ];
 
-                        // Create axes
-                        // https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
-                        var xAxis = chart.xAxes.push(
-                        am5xy.DateAxis.new(root, {
-                            maxDeviation: 0.5,
-                            groupData: false,
-                            baseInterval: {
-                                timeUnit: "day",
-                                count: 1
-                            },
-                            renderer: am5xy.AxisRendererX.new(root, {
-                                pan:"zoom",
-                                minGridDistance: 50
-                            }),
-                            tooltip: am5.Tooltip.new(root, {})
-                        })
-                        );
+                                    // Create chart
+                                    // https://www.amcharts.com/docs/v5/charts/xy-chart/
+                                    var chart = root.container.children.push(
+                                    am5xy.XYChart.new(root, {
+                                        focusable: true,
+                                        panX: true,
+                                        panY: true,
+                                        wheelX: "panX",
+                                        wheelY: "zoomX",
+                                        pinchZoomX:true
+                                    })
+                                    );
 
-                        var yAxis = chart.yAxes.push(
-                        am5xy.ValueAxis.new(root, {
-                            maxDeviation: 1,
-                            renderer: am5xy.AxisRendererY.new(root, {pan:"zoom"})
-                        })
-                        );
+                                    var easing = am5.ease.linear;
 
-                        // Add series
-                        // https://www.amcharts.com/docs/v5/charts/xy-chart/series/
-                        var series = chart.series.push(
-                        am5xy.LineSeries.new(root, {
-                            minBulletDistance: 10,
-                            xAxis: xAxis,
-                            yAxis: yAxis,
-                            valueYField: "value",
-                            valueXField: "date",
-                            tooltip: am5.Tooltip.new(root, {
-                                pointerOrientation: "horizontal",
-                                labelText: "{valueY}"
-                            })
-                        })
-                        );
+                                    // Create axes
+                                    // https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
+                                    var xAxis = chart.xAxes.push(
+                                    am5xy.DateAxis.new(root, {
+                                        maxDeviation: 0.5,
+                                        groupData: false,
+                                        baseInterval: {
+                                            timeUnit: "day",
+                                            count: 1
+                                        },
+                                        renderer: am5xy.AxisRendererX.new(root, {
+                                            pan:"zoom",
+                                            minGridDistance: 50
+                                        }),
+                                        tooltip: am5.Tooltip.new(root, {})
+                                    })
+                                    );
 
-                        // Set up data processor to parse string dates
-                        // https://www.amcharts.com/docs/v5/concepts/data/#Pre_processing_data
-                        series.data.processor = am5.DataProcessor.new(root, {
-                            dateFormat: "yyyy-MM-dd",
-                            dateFields: ["date"]
-                        });
+                                    var yAxis = chart.yAxes.push(
+                                    am5xy.ValueAxis.new(root, {
+                                        maxDeviation: 1,
+                                        renderer: am5xy.AxisRendererY.new(root, {pan:"zoom"})
+                                    })
+                                    );
 
-                        series.data.setAll(data);
+                                    // Add series
+                                    // https://www.amcharts.com/docs/v5/charts/xy-chart/series/
+                                    var series = chart.series.push(
+                                    am5xy.LineSeries.new(root, {
+                                        minBulletDistance: 10,
+                                        xAxis: xAxis,
+                                        yAxis: yAxis,
+                                        valueYField: "value",
+                                        valueXField: "date",
+                                        tooltip: am5.Tooltip.new(root, {
+                                            pointerOrientation: "horizontal",
+                                            labelText: "{valueY}"
+                                        })
+                                    })
+                                    );
 
-                        series.bullets.push(function() {
-                            var circle = am5.Circle.new(root, {
-                                radius: 4,
-                                fill: series.get("fill"),
-                                stroke: root.interfaceColors.get("background"),
-                                strokeWidth: 2
-                            });
+                                    // Set up data processor to parse string dates
+                                    // https://www.amcharts.com/docs/v5/concepts/data/#Pre_processing_data
+                                    series.data.processor = am5.DataProcessor.new(root, {
+                                        dateFormat: "yyyy-MM-dd",
+                                        dateFields: ["date"]
+                                    });
 
-                            return am5.Bullet.new(root, {
-                                sprite: circle
-                            });
-                        });
+                                    series.data.setAll(data);
 
-                        createTrendLine(
-                        [
-                        { date: "2012-01-02", value: 10 },
-                        { date: "2012-01-11", value: 19 }
-                        ],
-                        root.interfaceColors.get("positive")
-                        );
+                                    series.bullets.push(function() {
+                                        var circle = am5.Circle.new(root, {
+                                            radius: 4,
+                                            fill: series.get("fill"),
+                                            stroke: root.interfaceColors.get("background"),
+                                            strokeWidth: 2
+                                        });
 
-                        createTrendLine(
-                        [
-                        { date: "2012-01-17", value: 16 },
-                        { date: "2012-01-22", value: 10 }
-                        ],
-                        root.interfaceColors.get("negative")
-                        );
+                                        return am5.Bullet.new(root, {
+                                            sprite: circle
+                                        });
+                                    });
 
-                        function createTrendLine(data, color) {
-                            var series = chart.series.push(
-                            am5xy.LineSeries.new(root, {
-                                xAxis: xAxis,
-                                yAxis: yAxis,
-                                valueXField: "date",
-                                stroke: color,
-                                valueYField: "value"
-                            })
-                            );
+                                    createTrendLine(
+                                    [
+                                    { date: "2012-01-02", value: 10 },
+                                    { date: "2012-01-11", value: 19 }
+                                    ],
+                                    root.interfaceColors.get("positive")
+                                    );
 
-                            series.data.processor = am5.DataProcessor.new(root, {
-                                dateFormat: "yyyy-MM-dd",
-                                dateFields: ["date"]
-                            });
+                                    createTrendLine(
+                                    [
+                                    { date: "2012-01-17", value: 16 },
+                                    { date: "2012-01-22", value: 10 }
+                                    ],
+                                    root.interfaceColors.get("negative")
+                                    );
 
-                            series.data.setAll(data);
-                            series.appear(1000, 100);
-                        }
+                                    function createTrendLine(data, color) {
+                                        var series = chart.series.push(
+                                        am5xy.LineSeries.new(root, {
+                                            xAxis: xAxis,
+                                            yAxis: yAxis,
+                                            valueXField: "date",
+                                            stroke: color,
+                                            valueYField: "value"
+                                        })
+                                        );
 
-                        // Add cursor
-                        // https://www.amcharts.com/docs/v5/charts/xy-chart/cursor/
-                        var cursor = chart.set("cursor", am5xy.XYCursor.new(root, {
-                            xAxis: xAxis
-                        }));
-                        cursor.lineY.set("visible", false);
+                                        series.data.processor = am5.DataProcessor.new(root, {
+                                            dateFormat: "yyyy-MM-dd",
+                                            dateFields: ["date"]
+                                        });
 
-                        // add scrollbar
-                        chart.set("scrollbarX", am5.Scrollbar.new(root, {
-                            orientation: "horizontal"
-                        }));
+                                        series.data.setAll(data);
+                                        series.appear(1000, 100);
+                                    }
 
-                        // Make stuff animate on load
-                        // https://www.amcharts.com/docs/v5/concepts/animations/
-                        series.appear(1000, 100);
-                        chart.appear(1000, 100);
+                                    // Add cursor
+                                    // https://www.amcharts.com/docs/v5/charts/xy-chart/cursor/
+                                    var cursor = chart.set("cursor", am5xy.XYCursor.new(root, {
+                                        xAxis: xAxis
+                                    }));
+                                    cursor.lineY.set("visible", false);
 
-                    }); // end am5.ready()
-                </script>
+                                    // add scrollbar
+                                    chart.set("scrollbarX", am5.Scrollbar.new(root, {
+                                        orientation: "horizontal"
+                                    }));
 
-                </html>
+                                    // Make stuff animate on load
+                                    // https://www.amcharts.com/docs/v5/concepts/animations/
+                                    series.appear(1000, 100);
+                                    chart.appear(1000, 100);
+
+                                }); // end am5.ready()
+                            </script>
+
+                            </html>
