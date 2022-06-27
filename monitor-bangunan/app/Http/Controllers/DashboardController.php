@@ -97,7 +97,7 @@ class DashboardController extends Controller
         $respondents = $rsb_php->respondents;
         $skorkeseluruhan = $rsb_php->score;
 
-        return view('dashboard.hsl-survey', ['id' => $id, 'criterias' => $criterias, 'respondents' => $responden, 'score' => $skorkeseluruhan, 'respondents2' => $respondents]);
+        return view('dashboard.hsl-survey', ['id' => $id, 'criterias' => $criterias, 'respondents' => $responden, 'score' => $skorkeseluruhan, 'respondents2' => $respondents, 'rsb_score' => $rsb_json->rsb_score]);
     }
 
     public function getKategori($surveyId)
