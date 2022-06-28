@@ -4,7 +4,7 @@
         <div class="col-md-12">
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">Informasi Pemilik</h3>
+                    <h3 class="card-title">Informasi Stakeholder</h3>
 
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -15,7 +15,7 @@
                 <div class="card-body">
 
                     <div class="form-group">
-                        <label for="formFileMultiple" class="form-label">Nama Pemilik</label>
+                        <label for="formFileMultiple" class="form-label">Nama Stakeholder</label>
                         <input type="text" id="inputName" class="form-control" value="{{ $users->nama }}" readonly>
                     </div>
                     <div class="form-group">

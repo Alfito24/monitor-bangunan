@@ -227,7 +227,7 @@
                                                     <div class="col-12 box2">
                                                         <div class="row">
                                                             @php
-                                                            $kriteriaup = 2;
+                                                            $kriteriaup = 0;
                                                             @endphp
                                                             @foreach ($criterias as $criteria)
                                                             @if ($criteria->score->gap < 0)

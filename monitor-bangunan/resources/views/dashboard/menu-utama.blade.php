@@ -172,10 +172,6 @@
                                                                 <button type="submit" id="buttonStoreStakeholder"
                                                                     class="btn btn-primary mt-2">Simpan</button>
                                                             </div>
-                                                            <div class="input-group-append">
-                                                                <button type="submit" class="btn btn-default"><i
-                                                                        class="fas fa-search"></i></button>
-                                                            </div>
                                                         </div>
                                                     </div>
                                                 </form>
