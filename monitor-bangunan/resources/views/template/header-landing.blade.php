@@ -12,7 +12,7 @@
                     <li class="dropdown"><a href="#"><span>{{ Auth::user()->nama }}</span> <i
                                 class="bi bi-chevron-down"></i></a>
                         <ul>
-                            <li><a href="/pilihproyek/{{ auth()->user()->id }}">Dashboard</a></li>
+                            <li><a href="/dashboard/menu_utama/{{ auth()->user()->id }}">Dashboard</a></li>
                             <li><a href="#">
                                     <form action="/logout" method="POST">
                                         @csrf
