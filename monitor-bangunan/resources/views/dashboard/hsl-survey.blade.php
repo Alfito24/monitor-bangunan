@@ -77,7 +77,7 @@
                 <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#network-graph"
                 type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Relasi
                 Kriteria-Responden</button>
-                <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#rincian"
+                <button class="nav-link" id="rincian" data-bs-toggle="tab" data-bs-target="#rincian"
                 type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Rincian</button>
             </div>
         </nav>
