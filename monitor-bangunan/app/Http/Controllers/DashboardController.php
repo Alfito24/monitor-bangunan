@@ -27,7 +27,7 @@ class DashboardController extends Controller
         $users = DB::table('users')->where('id', $userId)->first();
         $proyek = DB::table('proyeks')->where('id', $proyekId)->first();
         if (Auth::user()->peran == 'owner1' || Auth::user()->peran == 'owner2' || Auth::user()->peran == 'manajemen') {
-            return view('dashboard.profil', compact('users', 'proyek'));
+            return view('dashboard.profil', compact('users', 'proyek', 'proyekId'));
         } else {
             abort(403);
         }
@@ -56,7 +56,8 @@ class DashboardController extends Controller
                     'proyek' => $proyek,
                     'stakeholder' => $stakeholder,
                     'survey' => $survey,
-                    'responden' => $responden
+                    'responden' => $responden,
+                    'proyekId' => $proyekId
                 ]
             );
         } else {
@@ -84,6 +85,7 @@ class DashboardController extends Controller
     }
     public function hasilSurvey($surveyId)
     {
+
         if (request()->ajax()) {
             return DB::table('survey_user')->join('surveys', 'survey_user.survey_id', '=', 'surveys.id')->where('survey_id', $surveyId)->get();
         }
@@ -93,11 +95,12 @@ class DashboardController extends Controller
         $rsb_json = DB::table('surveys')->select('rsb_score')->where('id', $surveyId)->first();
         $rsb_php = json_decode($rsb_json->rsb_score);
         $criterias = $rsb_php->criterias;
+        sort($criterias);
         $responden = count($rsb_php->respondents);
         $respondents = $rsb_php->respondents;
         $skorkeseluruhan = $rsb_php->score;
 
-        $survey = DB::table('surveys')->select('tanggal_dibuat', 'rsb_score')->get();
+        $survey = DB::table('surveys')->select('tanggal_dibuat', 'rsb_score')->whereNotNull('rsb_score')->get();
 
         return view('dashboard.hsl-survey', ['id' => $id, 'criterias' => $criterias, 'respondents' => $responden, 'score' => $skorkeseluruhan, 'respondents2' => $respondents, 'rsb_score' => $rsb_json->rsb_score, 'surveys' => $survey]);
     }

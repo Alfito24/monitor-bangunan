@@ -174,12 +174,24 @@
                                                 <div class="row">
                                                     @php
                                                     $kriteriabawah = 0;
+                                                    $kriteriasama = 0;
+                                                    $kriteriaatas = 0;
                                                     @endphp
                                                     @foreach ($criterias as $criteria)
+                                                    @if ($criteria->weight != 0)
                                                     @if ($criteria->score->gap > 0)
                                                     @php
                                                     $kriteriabawah++;
                                                     @endphp
+                                                    @elseif ($criteria->score->gap < 0)
+                                                    @php
+                                                        $kriteriaatas++;
+                                                    @endphp
+                                                    @elseif ($criteria->score->gap == 0)
+                                                    @php
+                                                        $kriteriasama++;
+                                                    @endphp
+                                                    @endif
                                                     @endif
                                                     @endforeach
                                                     <div class="col-3 d-flex">
@@ -197,18 +209,6 @@
                                             </div>
                                             <div class="row mt-4">
                                                 <div class="col-12 box2">
-                                                    @php
-                                                    $kriteriasama = 0;
-                                                    @endphp
-                                                    @foreach ($criterias as $criteria)
-                                                    @if ($criteria->weight != 0)
-                                                    @if ($criteria->score->gap = 0)
-                                                    @php
-                                                    $kriteriasama++;
-                                                    @endphp
-                                                    @endif
-                                                    @endif
-                                                    @endforeach
                                                     <div class="row">
                                                         <div class="col-3 d-flex">
                                                             <h1 style="font-size: 60px" class="align-self-center">
@@ -226,18 +226,8 @@
                                                 <div class="row mt-4">
                                                     <div class="col-12 box2">
                                                         <div class="row">
-                                                            @php
-                                                            $kriteriaup = 0;
-                                                            @endphp
-                                                            @foreach ($criterias as $criteria)
-                                                            @if ($criteria->score->gap < 0)
-                                                            @php
-                                                            $kriteriaup++;
-                                                            @endphp
-                                                            @endif
-                                                            @endforeach
                                                             <div class="col-3 d-flex">
-                                                                <h1 style="font-size: 60px" class="align-self-center">{{ $kriteriaup }}
+                                                                <h1 style="font-size: 60px" class="align-self-center">{{ $kriteriaatas }}
                                                                 </h1>
                                                             </div>
                                                             <div class="col-9 align-middle d-flex">
