@@ -107,6 +107,6 @@ Route::get('/hapussurvey/{surveyId}', [SurveyController::class, 'hapussurvey']);
 Route::get('/test2', function ()
 {
 	$Survey = \App\Models\Survey::find(1);
-	
+
 	return view('network-chart', ['rsb_score' => $Survey->rsb_score]);
 });
