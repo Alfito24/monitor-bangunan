@@ -10,14 +10,16 @@ use Illuminate\Support\Facades\Auth;
 
 class ProyekController extends Controller
 {
-    public function show(){
-        if(Auth::check()){
+    public function show()
+    {
+        if (Auth::check()) {
             return view('proyekform');
-        } else{
+        } else {
             return abort('403');
         }
     }
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $proyek = new Proyek();
         $proyek->namaProyek = $request->nama;
         $proyek->tanggalProyek = $request->tanggal;
@@ -25,10 +27,11 @@ class ProyekController extends Controller
         $proyek->save();
         $proyek->stakeholder()->attach(auth()->user()->id);
         // return redirect('dashboard/menu_utama/{proyekId}', 302, ['proyekId'=>$proyek->id]);
-        return redirect('dashboard/menu_utama/'.$proyek->id);
+        return redirect('dashboard/menu_utama/' . $proyek->id);
     }
-    public function index($userId){
-        $proyeks = DB::table('proyek_user')->join('proyeks', 'proyek_user.proyek_id', '=', 'proyeks.id')->where('user_id', $userId)->get();
+    public function index($userId)
+    {
+        $proyeks = DB::table('proyek_user')->join('proyeks', 'proyek_user.proyek_id', '=', 'proyeks.id')->where('user_id', Auth::id())->get();
 
         return view('pilihproyek', compact('proyeks'));
     }
