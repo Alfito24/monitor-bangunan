@@ -287,9 +287,6 @@
                                             <div class="row">
                                                 <div class="col-12">
                                                     <div class="box">
-                                                        <div class="container">
-                                                            <a class="btn btn-primary text-light fw-bold">Cetak</a>
-                                                        </div>
                                                         <table class="table table-kriteria mt-3">
                                                             <thead>
                                                                 <tr>
@@ -330,22 +327,24 @@
                                                                         @endif
                                                                         @endforeach
                                                                         @endforeach
-
+                                                                        <td>
                                                                         @foreach ($respondents2 as $r)
                                                                         @foreach ($r->responses as $res)
                                                                         @if ($res->criteriaId == $criteria->id)
-                                                                        <td>{{ $res->expectation }}</td>
+                                                                        {{ $res->expectation }} <br>
                                                                         @endif
                                                                         @endforeach
                                                                         @endforeach
-
+                                                                    </td>
+                                                                    <td>
                                                                         @foreach ($respondents2 as $r)
                                                                         @foreach ($r->responses as $res)
                                                                         @if ($res->criteriaId == $criteria->id)
-                                                                        <td>{{ $res->reality }}</td>
+                                                                        {{ $res->reality }} <br>
                                                                         @endif
                                                                         @endforeach
                                                                         @endforeach
+                                                                    </td>
                                                                         <td>{{ $criteria->weight * 100 }}%</td>
                                                                         <td>{{ $criteria->score->realityTotal * 10 }}%</td>
                                                                         <td>
