@@ -186,4 +186,11 @@ class SurveyController extends Controller
 
         return redirect('pilihbangunan/'.Auth::id());
     }
+
+    public function storersbcalc2($surveyId, Request $request){
+        $result = json_decode($request->result, true);
+        DB::table('surveys')->where('id', $surveyId)->limit(1)->update(array('rsb_score' => $result));
+
+        return redirect('pilihbangunan/'.Auth::id());
+    }
 }

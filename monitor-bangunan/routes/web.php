@@ -99,7 +99,8 @@ Route::get('test', function (\Illuminate\Http\Request $request) {
 
 
 Route::get('/rsbcalc/{surveyId}', [SurveyController::class, 'rsbcalc']);  //menghitung hasil survey dengan rsb algorithm
-Route::get('/rsbcalc/store/{surveyId}', [SurveyController::class, 'storersbcalc']); //menyimpan hasil rsbcalc ke dalam database
+Route::get('/rsbcalc/store/{surveyId}', [SurveyController::class, 'storersbcalc']);
+Route::post('/rsbcalc/store/{surveyId}', [SurveyController::class, 'storersbcalc2']); //menyimpan hasil rsbcalc ke dalam database
 
 
 Route::get('/hapussurvey/{surveyId}', [SurveyController::class, 'hapussurvey']);
