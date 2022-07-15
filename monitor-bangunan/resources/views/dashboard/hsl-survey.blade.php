@@ -328,30 +328,33 @@
                                                     <th scope="row">{{ $loop->iteration }}</th>
                                                     <td>{{ $criteria->id }}</td>
                                                     <td>{{ $criteria->isiVariabel }}</td>
-
+                                                    <td>
                                                     @foreach ($respondents2 as $r)
                                                         @foreach ($r->responses as $res)
                                                             @if ($res->criteriaId == $criteria->id)
-                                                                <td>{{ $r->id }}</td>
+                                                                {{ $r->id }} <br>
                                                             @endif
                                                         @endforeach
                                                     @endforeach
-
+                                                </td>
+                                                <td>
                                                     @foreach ($respondents2 as $r)
                                                         @foreach ($r->responses as $res)
                                                             @if ($res->criteriaId == $criteria->id)
-                                                                <td>{{ $res->expectation }}</td>
+                                                                {{ $res->expectation }} <br>
                                                             @endif
                                                         @endforeach
                                                     @endforeach
-
+                                                </td>
+                                                <td>
                                                     @foreach ($respondents2 as $r)
                                                         @foreach ($r->responses as $res)
                                                             @if ($res->criteriaId == $criteria->id)
-                                                                <td>{{ $res->reality }}</td>
+                                                               {{ $res->reality }} <br>
                                                             @endif
                                                         @endforeach
                                                     @endforeach
+                                                </td>
                                                     <td>{{ $criteria->weight * 100 }}%</td>
                                                     <td>{{ $criteria->score->realityTotal * 10 }}%</td>
                                                     <td>
