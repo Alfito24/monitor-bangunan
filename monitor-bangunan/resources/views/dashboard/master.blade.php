@@ -96,7 +96,7 @@
                         class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="/dashboard/profil/{{ auth()->user()->id }}"
+                        <a href="/dashboard/profil/{{$proyekId}}/{{ auth()->user()->id }}"
                             class="d-block">{{ Auth::user()->nama }}</a>
                         </div>
                     </div>

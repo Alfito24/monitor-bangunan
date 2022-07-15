@@ -6,6 +6,7 @@ use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\StakeholdersController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\QueryController;
 use App\Http\Controllers\VariabelController;
 use Illuminate\Support\Facades\Route;
 
@@ -105,9 +106,10 @@ Route::post('/rsbcalc/store/{surveyId}', [SurveyController::class, 'storersbcalc
 
 Route::get('/hapussurvey/{surveyId}', [SurveyController::class, 'hapussurvey']);
 
-Route::get('/test2', function ()
-{
-	$Survey = \App\Models\Survey::find(1);
+Route::get('/test2', function () {
+    $Survey = \App\Models\Survey::find(1);
 
-	return view('network-chart', ['rsb_score' => $Survey->rsb_score]);
+    return view('network-chart', ['rsb_score' => $Survey->rsb_score]);
 });
+
+Route::get('/testquery/{userId}', [QueryController::class, 'index']);
