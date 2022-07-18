@@ -291,9 +291,6 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="box">
-                                <div class="container">
-                                    <a class="btn btn-primary text-light fw-bold">Cetak</a>
-                                </div>
                                 <table class="table table-kriteria mt-3">
                                     <thead>
                                         <tr>
@@ -353,7 +350,7 @@
                                                         @endforeach
                                                     @endforeach
                                                 </td>
-                                                    <td>{{ $criteria->weight * 100 }}%</td>
+                                                    <td>{{ number_format($criteria->weight * 100 , 2)}}%</td>
                                                     <td>{{ $criteria->score->realityTotal * 10 }}%</td>
                                                     <td>
                                                         @if ($criteria->score->realityTotal >= $criteria->score->expectationTotal)
