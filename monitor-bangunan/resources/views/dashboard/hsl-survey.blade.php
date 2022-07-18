@@ -113,7 +113,7 @@
                                                     <td scope="row">{{ $indexrow }}</td>
                                                     <td>{{ $criteria->id }}</td>
                                                     <td>{{ $criteria->isiVariabel }}</td>
-                                                    <td>{{ $criteria->score->realityTotal }}</td>
+                                                    <td>{{ number_format($criteria->score->realityTotal, 2) }}</td>
                                                 </tr>
                                                 @php
                                                     $indexrow++;
@@ -123,8 +123,6 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <a role="tab" data-toggle="tab" href="#rincian" class="btn btn-dark text-light">Lihat
-                                rincian...</a>
                         </div>
                         <div class="col-3">
                             <div class="row">
@@ -169,7 +167,7 @@
                                 <div class="col-12 box2">
                                     <h4>Skor Keseluruhan : </h4>
                                     <p><span class=""
-                                            style="font-size: 60px;color:green">{{ $score->realityTotal }}</span><span
+                                            style="font-size: 60px;color:green">{{ number_format($score->realityTotal, 2) }}</span><span
                                             style="font-size: 1.5rem">/5</span></p>
                                 </div>
                             </div>
