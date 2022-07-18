@@ -760,7 +760,7 @@
     series_kategori.hiddenState.properties.startAngle = -90;
 
     kategori.legend = new am4charts.Legend();
-    kategori.dataSource.url = "http://127.0.0.1:8000/api/getkategori/" + id;
+    kategori.dataSource.url = "http://manfaatsosialgedung.digitalise.biz.id/api/getkategori/" + id;
 
     //Chart pendidikan
     var pend = am4core.create("chartpendidikan", am4charts.PieChart);
@@ -774,7 +774,7 @@
     series_pend.hiddenState.properties.startAngle = -90;
 
     pend.legend = new am4charts.Legend();
-    pend.dataSource.url = "http://127.0.0.1:8000/api/getpendidikan/" + id;
+    pend.dataSource.url = "http://manfaatsosialgedung.digitalise.biz.id/api/getpendidikan/" + id;
 
     //Chart usia
     var usia = am4core.create("chartusia", am4charts.PieChart);
@@ -788,7 +788,7 @@
     series_usia.hiddenState.properties.startAngle = -90;
 
     usia.legend = new am4charts.Legend();
-    usia.dataSource.url = "http://127.0.0.1:8000/api/getusia/" + id;
+    usia.dataSource.url = "http://manfaatsosialgedung.digitalise.biz.id/api/getusia/" + id;
 
     //Chart pengetahuan
     var pengetahuan = am4core.create("chartpengetahuan", am4charts.PieChart);
@@ -802,7 +802,7 @@
     series_pengetahuan.hiddenState.properties.startAngle = -90;
 
     pengetahuan.legend = new am4charts.Legend();
-    pengetahuan.dataSource.url = "http://127.0.0.1:8000/api/getpengetahuan/" + id;
+    pengetahuan.dataSource.url = "http://manfaatsosialgedung.digitalise.biz.id/api/getpengetahuan/" + id;
 </script>
 //
 <script>
